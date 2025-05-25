@@ -14,7 +14,8 @@ GameObject:
   - component: {fileID: 3399391974841538317}
   - component: {fileID: 2014344564246327817}
   - component: {fileID: 2939001076423414211}
-  m_Layer: 0
+  - component: {fileID: 5373569708151910506}
+  m_Layer: 3
   m_Name: Personagem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +97,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7011022804326178132}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 10bb0b6de0f911548ac97497e2599e87, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -122,8 +123,8 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
+  m_Speed: 1
+  m_Acceleration: 1
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
@@ -142,7 +143,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7011022804326178132}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 10
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -161,3 +162,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &5373569708151910506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7011022804326178132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 532a9412cc832284697702a941cc2760, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  priorityDetectionRadius: 0.5
+  attackRange: 0.1
+  damage: 1
+  _type: 0
+  detectionLayer:
+    serializedVersion: 2
+    m_Bits: 8
