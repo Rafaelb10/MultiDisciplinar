@@ -1705,6 +1705,7 @@ GameObject:
   - component: {fileID: 614224688}
   - component: {fileID: 614224687}
   - component: {fileID: 614224686}
+  - component: {fileID: 614224689}
   m_Layer: 0
   m_Name: CardLocate5
   m_TagString: Untagged
@@ -1802,6 +1803,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 614224684}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &614224689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 614224684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50f2b0feeaf6b524381926731edb9ef6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cardManager: {fileID: 1228725707}
 --- !u!1 &659490001
 GameObject:
   m_ObjectHideFlags: 0
@@ -2519,6 +2533,7 @@ GameObject:
   - component: {fileID: 855374892}
   - component: {fileID: 855374891}
   - component: {fileID: 855374890}
+  - component: {fileID: 855374893}
   m_Layer: 0
   m_Name: CardLocate2
   m_TagString: Untagged
@@ -2616,6 +2631,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 855374888}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &855374893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 855374888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50f2b0feeaf6b524381926731edb9ef6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cardManager: {fileID: 1228725707}
 --- !u!1 &879963091
 GameObject:
   m_ObjectHideFlags: 0
@@ -3027,6 +3055,7 @@ GameObject:
   - component: {fileID: 1221268635}
   - component: {fileID: 1221268634}
   - component: {fileID: 1221268633}
+  - component: {fileID: 1221268636}
   m_Layer: 0
   m_Name: CardLocate6
   m_TagString: Untagged
@@ -3124,6 +3153,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1221268631}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1221268636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1221268631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50f2b0feeaf6b524381926731edb9ef6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cardManager: {fileID: 1228725707}
 --- !u!1 &1228725706
 GameObject:
   m_ObjectHideFlags: 0
@@ -3164,6 +3206,7 @@ MonoBehaviour:
   - {fileID: 83870574}
   - {fileID: 359660997}
   - {fileID: 2122486627}
+  _CardToBuy: {fileID: 1439969167}
 --- !u!4 &1228725708
 Transform:
   m_ObjectHideFlags: 0
@@ -3299,6 +3342,7 @@ GameObject:
   - component: {fileID: 1275802961}
   - component: {fileID: 1275802960}
   - component: {fileID: 1275802959}
+  - component: {fileID: 1275802962}
   m_Layer: 0
   m_Name: CardLocate4
   m_TagString: Untagged
@@ -3396,6 +3440,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1275802957}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1275802962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1275802957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50f2b0feeaf6b524381926731edb9ef6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cardManager: {fileID: 1228725707}
 --- !u!1 &1284502576
 GameObject:
   m_ObjectHideFlags: 0
@@ -4240,6 +4297,7 @@ GameObject:
   - component: {fileID: 1546631573}
   - component: {fileID: 1546631572}
   - component: {fileID: 1546631571}
+  - component: {fileID: 1546631574}
   m_Layer: 0
   m_Name: CardLocate3
   m_TagString: Untagged
@@ -4337,6 +4395,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1546631569}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1546631574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1546631569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50f2b0feeaf6b524381926731edb9ef6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cardManager: {fileID: 1228725707}
 --- !u!1 &1551171064
 GameObject:
   m_ObjectHideFlags: 0
@@ -4673,6 +4744,7 @@ GameObject:
   - component: {fileID: 1842167557}
   - component: {fileID: 1842167556}
   - component: {fileID: 1842167555}
+  - component: {fileID: 1842167558}
   m_Layer: 0
   m_Name: CardLocate1
   m_TagString: Untagged
@@ -4770,6 +4842,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1842167553}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1842167558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1842167553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50f2b0feeaf6b524381926731edb9ef6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cardManager: {fileID: 1228725707}
 --- !u!1 &1854686301
 GameObject:
   m_ObjectHideFlags: 0

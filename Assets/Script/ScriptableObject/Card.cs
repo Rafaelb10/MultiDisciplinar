@@ -3,17 +3,11 @@ using UnityEngine;
 public class Card : MonoBehaviour ,IInterectable
 {
     public CardData Data { get; private set; }
-    
     private Material _materialInstance;
     private Color _originalColor;
+    private int _status = 0;
 
-
-    public Card(CardData data)
-    {
-        Data = data;
-    }
-
-    void Start()
+    private void Start()
     {
         Renderer renderer = GetComponent<Renderer>();
         if (renderer != null)
@@ -23,8 +17,37 @@ public class Card : MonoBehaviour ,IInterectable
         }
     }
 
-    public void Interect()
+    public void SetData(CardData data)
     {
+        Data = data;
+    }
+
+    public void Interect() 
+    {
+        if (_status == 0 && FindObjectOfType<CardManager>().CardsInHand.Count < 5)
+        {
+            _status = 1;
+            FindObjectOfType<CardManager>().SelectCard(this);
+            return;
+        }
+
+        if (_status == 1 && FindObjectOfType<CardManager>().HaveCard == false)
+        {
+            _status = 2;
+            FindObjectOfType<CardManager>().HoldCard(this);
+            return;
+        }
+
+        if (_status == 2)
+        {
+            TableLocation table = GetComponentInParent<TableLocation>();
+            if (table != null)
+            {
+                Destroy(this.gameObject);
+                table.ClearCardFromThisPlace();
+            }
+            return;
+        }
 
     }
 

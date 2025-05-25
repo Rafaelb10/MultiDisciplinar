@@ -35,4 +35,6 @@ public class CardData : ScriptableObject
     [SerializeField] private int _life;
     [SerializeField] private int _attack;
     [SerializeField] private int _velocity;
+
+    public GameObject GameObjectCard { get => _gameObjectCard; set => _gameObjectCard = value; }
 }
