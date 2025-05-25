@@ -1,0 +1,34 @@
+{
+    "name": "CameraInput",
+    "maps": [
+        {
+            "name": "MouseAction",
+            "id": "fb003944-4af5-4e4b-856e-e521b992ba39",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "340d264f-7f3a-4cfc-b8c9-b724f5b5d709",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "ae077a68-4c8c-4c5b-98a6-b2b0e9bda255",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
