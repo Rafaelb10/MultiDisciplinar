@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class AnimationScript : MonoBehaviour
@@ -30,6 +31,13 @@ public class AnimationScript : MonoBehaviour
         {
             animator.SetTrigger("Die");
             isDead = true;
+            StartCoroutine(DestroyObject());
+        }
+
+        IEnumerator DestroyObject()
+        {
+            yield return new WaitForSeconds(3.5f);
+            Destroy(gameObject);
         }
     }
 }
