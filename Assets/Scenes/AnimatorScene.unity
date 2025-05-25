@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 496333473}
   - component: {fileID: 496333472}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: AnimationDummie
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
