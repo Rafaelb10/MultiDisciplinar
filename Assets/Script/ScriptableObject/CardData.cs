@@ -34,4 +34,5 @@ public class CardData : ScriptableObject
     [Header("Character attributes")]
     [SerializeField] private int _life;
     [SerializeField] private int _attack;
+    [SerializeField] private int _velocity;
 }
