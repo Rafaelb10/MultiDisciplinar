@@ -35,7 +35,6 @@ public class IaCharacther : MonoBehaviour, IDemageble
 
         if (currentTarget == null)
         {
-            // Nenhum alvo disponível, parar completamente
             agent.isStopped = true;
             agent.ResetPath();
             return;
@@ -45,7 +44,6 @@ public class IaCharacther : MonoBehaviour, IDemageble
 
         if (distance > attackRange)
         {
-            // Só define novo destino se for diferente
             if (!agent.hasPath || agent.destination != currentTarget.position)
             {
                 agent.SetDestination(currentTarget.position);
@@ -57,7 +55,6 @@ public class IaCharacther : MonoBehaviour, IDemageble
         {
             agent.isStopped = true;
 
-            // Gira suavemente para o alvo
             Vector3 dir = (currentTarget.position - transform.position).normalized;
             if (dir != Vector3.zero)
             {
