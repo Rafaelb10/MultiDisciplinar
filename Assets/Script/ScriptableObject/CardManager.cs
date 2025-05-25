@@ -4,6 +4,7 @@ using UnityEngine;
 public class CardManager : MonoBehaviour
 {
     [SerializeField] private List<CardData> possibleCards;
+    [SerializeField] private List<Transform> _cardsSlot = new List<Transform>();
 
     private List<Card> _cardsInHand = new List<Card>();
 
@@ -12,13 +13,15 @@ public class CardManager : MonoBehaviour
     private Card _insuredCard;
     private bool _haveCard = false;
 
-    [SerializeField] private List<Transform> _cardsSlot = new List<Transform>();
-    public void BuyCard()
+
+    private void Start()
     {
+        
     }
 
     public void GenerateCard()
     {
+
     }
 
     public void PlaceCard()
