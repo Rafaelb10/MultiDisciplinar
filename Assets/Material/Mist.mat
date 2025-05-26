@@ -63,7 +63,7 @@ Material:
     - _Intensity: 2.91
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _RotationSpeed: 2.42
+    - _RotationSpeed: 2.3
     m_Colors:
     - _Color1: {r: 1, g: 1, b: 1, a: 0}
   m_BuildTextureStacks: []

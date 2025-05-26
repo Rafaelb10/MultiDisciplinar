@@ -231,6 +231,15 @@
       },
       "url": "https://packages.unity.com"
     },
+    "www.nulltale.ditherfx": {
+      "version": "https://github.com/NullTale/DitherFx.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.render-pipelines.universal": "14.0.6"
+      },
+      "hash": "df4de0be28d9d27289b261b4e9d35eef1831ddcc"
+    },
     "com.unity.modules.accessibility": {
       "version": "1.0.0",
       "depth": 0,
