@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,10 +6,18 @@ public class Card : MonoBehaviour ,IInterectable
 {
     [SerializeField] private Image _spriteImage;
     public CardData Data { get; private set; }
+
     private Material _materialInstance;
     private Color _originalColor;
     private int _status = 0;
 
+    private Transform _spawCharacters;
+
+    private bool _invoked;
+    private bool _inTheTable;
+
+    public Transform SpawCharacters { get => _spawCharacters; set => _spawCharacters = value; }
+    public bool InTheTable { get => _inTheTable; set => _inTheTable = value; }
 
     public void SetData(CardData data)
     {
@@ -29,6 +38,15 @@ public class Card : MonoBehaviour ,IInterectable
 
     }
 
+    private void Update()
+    {
+        if (_status == 2 && FindObjectOfType<UiManager>().StartBattle == true && _invoked == false && InTheTable == true)
+        {
+            Instantiate(Data.GameObjectCharacter, SpawCharacters);
+            FindObjectOfType<UiManager>().LoseEnergy(Data.Cost);
+            StartCoroutine(CooldownToInvoke());
+        }
+    }
     public void Interect() 
     {
         if (_status == 0 && FindObjectOfType<CardManager>().CardsInHand.Count < 5)
@@ -75,5 +93,12 @@ public class Card : MonoBehaviour ,IInterectable
         {
             _materialInstance.SetColor("_BaseColor", _originalColor);
         }
+    }
+
+    private IEnumerator CooldownToInvoke()
+    {  
+        _invoked = true;
+       yield return new WaitForSeconds(Random.Range(10f, 20f));
+        _invoked = false;
     }
 }
