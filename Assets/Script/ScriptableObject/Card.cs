@@ -42,7 +42,9 @@ public class Card : MonoBehaviour ,IInterectable
     {
         if (_status == 2 && FindObjectOfType<UiManager>().StartBattle == true && _invoked == false && InTheTable == true)
         {
-            Instantiate(Data.GameObjectCharacter, SpawCharacters);
+            GameObject character = Data.GameObjectCharacter;
+            character.transform.localScale = new Vector3(1, 1, 1);
+            Instantiate(character, _spawCharacters);
             FindObjectOfType<UiManager>().LoseEnergy(Data.Cost);
             StartCoroutine(CooldownToInvoke());
         }
