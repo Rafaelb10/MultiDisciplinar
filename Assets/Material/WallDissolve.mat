@@ -47,7 +47,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _Cutoff: 0.4
-    - _CutoffHeight: 1.94
+    - _CutoffHeight: 1.81
     - _DissolveParameter: -6.24
     - _DissolvePatternStrength: -0.12
     - _EdgeWidth: 0.07
