@@ -47,16 +47,16 @@ Material:
     m_Ints: []
     m_Floats:
     - _Cutoff: 0.4
-    - _CutoffHeight: 0.67
+    - _CutoffHeight: 1.94
     - _DissolveParameter: -6.24
     - _DissolvePatternStrength: -0.12
-    - _EdgeWidth: 0.12
+    - _EdgeWidth: 0.07
     - _NoiseScale: 10.41
     - _NoiseStrength: -0.3
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
-    - _EdgeColor: {r: 0.6730823, g: 0, b: 3.9999995, a: 0}
+    - _EdgeColor: {r: 0.12758416, g: 0.1324191, b: 0.12758416, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &3126817172354837522
