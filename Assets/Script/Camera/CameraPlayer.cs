@@ -7,6 +7,8 @@ public class CameraPlayer : MonoBehaviour
     private bool _isInteracting = false;
 
     [SerializeField] private InputActionReference click;
+    [SerializeField] private GameObject _freeCam;
+    [SerializeField] private GameObject _fpCam;
 
     void Start()
     {
@@ -15,6 +17,12 @@ public class CameraPlayer : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKey(KeyCode.E))
+        {
+            _freeCam.SetActive(true);
+            _fpCam.SetActive(false);
+        }
+
 
         if (_isInteracting == false)
         {
