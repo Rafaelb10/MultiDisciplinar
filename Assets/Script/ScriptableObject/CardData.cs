@@ -11,15 +11,8 @@ public class CardData : ScriptableObject
         Monstrous
     }
 
-    public enum CardMaster
-    {
-        Player,
-        Bot
-    }
-
     [Header("Card Type")]
     [SerializeField] private CardTime _cardType;
-    private CardMaster _cardMaster;
 
     [Header("Normal")]
     [SerializeField] private Sprite _sprite;
