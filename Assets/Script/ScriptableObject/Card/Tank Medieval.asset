@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Tank Medieval
   m_EditorClassIdentifier: 
   _cardType: 1
-  _sprite: {fileID: 0}
+  _sprite: {fileID: 21300000, guid: a7db875cf844bc74b94883a242f14b7d, type: 3}
   _gameObjectCard: {fileID: 4749338989641519367, guid: cdb54e78ce6b8bf4f80c4dcb1d08c3ea, type: 3}
   _gameObjectCharacter: {fileID: 7011022804326178132, guid: 83886b81959ba8f4f9b23ad54c7aec0d, type: 3}
   _name: Tank
