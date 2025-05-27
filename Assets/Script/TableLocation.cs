@@ -5,11 +5,13 @@ public class TableLocation : MonoBehaviour, IInterectable
     private Material _materialInstance;
     private Color _originalColor;
 
-    private Transform _transformSpaw;
+    [SerializeField] private Transform _transformSpaw;
     private Card _cardInThisPlace;
     private bool haveACardInthisPlace = false;
 
     [SerializeField] private CardManager _cardManager;
+
+    public Transform TransformSpaw { get => _transformSpaw;}
 
     void Start()
     {

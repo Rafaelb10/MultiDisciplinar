@@ -37,5 +37,7 @@ public class CardData : ScriptableObject
     [SerializeField] private int _velocity;
 
     public GameObject GameObjectCard { get => _gameObjectCard; set => _gameObjectCard = value; }
-    public Sprite Sprite { get => _sprite; set => _sprite = value; }
+    public Sprite Sprite { get => _sprite;}
+    public GameObject GameObjectCharacter { get => _gameObjectCharacter;}
+    public int Cost { get => _cost;}
 }

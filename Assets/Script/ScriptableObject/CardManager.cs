@@ -104,6 +104,8 @@ public class CardManager : MonoBehaviour
         _holdCard.transform.localRotation = Quaternion.identity;
         _holdCard.transform.localScale = Vector3.one;
 
+        _holdCard.SpawCharacters = location.TransformSpaw;
+        _holdCard.InTheTable = true;
         location.ReceiveCard(_holdCard);
 
         _holdCard = null;
