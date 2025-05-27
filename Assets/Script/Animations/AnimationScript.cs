@@ -5,40 +5,62 @@ public class AnimationScript : MonoBehaviour
 {
     private Animator animator;
     private bool isDead = false;
-
+    private bool walking = false;
     void Start()
     {
         animator = GetComponent<Animator>();
-        animator.SetTrigger("Spawn");
+       
     }
 
     void Update()
     {
         if (isDead) return;
 
-        // Caminhar
-        bool walking = Input.GetKey(KeyCode.W);
-        animator.SetBool("isWalking", walking);
-
-        // Atacar
-        if (Input.GetKeyDown(KeyCode.Space))
+        Andar();
+       
+    }
+    //public void Spawn()
+    //{
+    //    animator.SetTrigger("Spawn");
+    //}
+    public void Andar()
+    {
+        if(walking == true)
         {
-            animator.SetTrigger("Attack");
+            animator.SetBool("isWalking", walking);
         }
+        
+        
+    }
+    public void IsWalking()
+    {
+        walking = true;
+       
+    }
+    public void IsNotWalking()
+    {
+        walking = false;
 
-        // Morrer
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            animator.SetTrigger("Die");
-            isDead = true;
-            StartCoroutine(DestroyObject());
-        }
+    }
 
-        IEnumerator DestroyObject()
-        {
-            yield return new WaitForSeconds(3.5f);
-            Destroy(gameObject);
-        }
+    public void Atacar()
+    {
+   
+      animator.SetTrigger("Attack");
+    }
+    public void Morrer()
+    {
+       
+      animator.SetTrigger("Die");
+      isDead = true;
+      StartCoroutine(DestroyObject());
+
+    }
+    IEnumerator DestroyObject()
+    {
+        yield return new WaitForSeconds(3.5f);
+        Destroy(gameObject);
     }
 }
+
 
