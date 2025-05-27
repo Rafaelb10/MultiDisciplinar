@@ -14,9 +14,9 @@ public class IaCharacther : MonoBehaviour, IDemageble
     private bool isAttacking = false;
 
     private NavMeshAgent agent;
-    [SerializeField] private Transform mainTarget;
-    [SerializeField] private Transform priorityTarget;
-    [SerializeField] private Transform currentTarget;
+    private Transform mainTarget;
+    private Transform priorityTarget;
+    private Transform currentTarget;
 
     private int _hp = 10;
 
