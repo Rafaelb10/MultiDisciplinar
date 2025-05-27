@@ -2521,6 +2521,7 @@ GameObject:
   - component: {fileID: 791296544}
   - component: {fileID: 791296543}
   - component: {fileID: 791296542}
+  - component: {fileID: 791296546}
   m_Layer: 0
   m_Name: Muralha
   m_TagString: Untagged
@@ -2617,6 +2618,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &791296546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 791296541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f69844c76d38d634ea7f30743b71f1c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _materialToGive: {fileID: 2100000, guid: c1fae4ef6a4c42d4191bc8351b94d9de, type: 2}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
