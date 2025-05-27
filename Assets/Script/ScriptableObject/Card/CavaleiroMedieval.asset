@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CavaleiroMedieval
   m_EditorClassIdentifier: 
   _cardType: 1
-  _sprite: {fileID: 0}
+  _sprite: {fileID: 21300000, guid: 2397903fd7e49c6478bf2199f72af991, type: 3}
   _gameObjectCard: {fileID: 4749338989641519367, guid: cdb54e78ce6b8bf4f80c4dcb1d08c3ea, type: 3}
   _gameObjectCharacter: {fileID: 7011022804326178132, guid: 83886b81959ba8f4f9b23ad54c7aec0d, type: 3}
   _name: Cavaleiro

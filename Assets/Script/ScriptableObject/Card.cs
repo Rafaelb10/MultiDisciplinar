@@ -1,11 +1,20 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Card : MonoBehaviour ,IInterectable
 {
+    [SerializeField] private Image _spriteImage;
     public CardData Data { get; private set; }
     private Material _materialInstance;
     private Color _originalColor;
     private int _status = 0;
+
+
+    public void SetData(CardData data)
+    {
+        Data = data;
+    }
+
 
     private void Start()
     {
@@ -15,11 +24,9 @@ public class Card : MonoBehaviour ,IInterectable
             _materialInstance = renderer.material;
             _originalColor = _materialInstance.GetColor("_BaseColor");
         }
-    }
 
-    public void SetData(CardData data)
-    {
-        Data = data;
+        _spriteImage.sprite =  Data.Sprite;
+
     }
 
     public void Interect() 
