@@ -5,21 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fcb1249f-b250-42db-ba77-46d0232418f4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Animator/bruxo/Andar.anim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Animator/bruxo/Andar.anim.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Animator/bruxo/Ataque.anim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Animator/bruxo/Ataque.anim.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Animator/bruxo/Morte.anim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Animator/bruxo/Morte.anim.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Animator/bruxo/Spawn.anim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Animator/bruxo/Spawn.anim.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animator/bruxo/Bruxo.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animator/bruxo/Bruxo.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Material/Mist.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Material/Mist.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Material/Mist.shadergraph" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Material/Mist.shadergraph" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Settings/PC_Renderer.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/PC_Renderer.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Material/DissolveWall.shadergraph" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Material/DissolveWall.shadergraph" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Material/Dither.shadergraph" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Material/Dither.shadergraph" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,21 +16,21 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "pedro-leote"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;pedro-leote&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/Rafaelb10/MultiDisciplinar.git",
-    "accountId": "d5ec4b30-9250-441a-b763-97cc3623f9c7"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Rafaelb10/MultiDisciplinar.git&quot;,
+    &quot;accountId&quot;: &quot;d5ec4b30-9250-441a-b763-97cc3623f9c7&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 5
-}]]></component>
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="2xdnVhCqyWFskLyTjINbh6tV9Yz" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -54,7 +41,7 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "Merging main",
+    "git-widget-placeholder": "main",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -123,6 +110,7 @@
       <option name="presentableId" value="Default" />
       <updated>1748276845405</updated>
       <workItem from="1748276847576" duration="1268000" />
+      <workItem from="1748346479759" duration="60000" />
     </task>
     <servers />
   </component>
