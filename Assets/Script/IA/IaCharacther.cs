@@ -1,6 +1,6 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
-using System.Collections;
 
 public class IaCharacther : MonoBehaviour, IDemageble
 {
@@ -9,19 +9,29 @@ public class IaCharacther : MonoBehaviour, IDemageble
     [SerializeField] private int damage = 1;
     [SerializeField] private int _type = 0;
     [SerializeField] private LayerMask detectionLayer;
+    private Weapon weapon;
 
     private bool isAttacking = false;
 
     private NavMeshAgent agent;
-    private Transform mainTarget;
-    private Transform priorityTarget;
+    [SerializeField] private Transform mainTarget;
+    [SerializeField] private Transform priorityTarget;
+    [SerializeField] private Transform currentTarget;
 
     private int _hp = 10;
+
+    private Rigidbody rb;
+    [SerializeField] private Role role;
+
+    public bool IsAttacking { get => isAttacking; set => isAttacking = value; }
 
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         agent.stoppingDistance = attackRange;
+
+        weapon = GetComponentInChildren<Weapon>();
+        rb = GetComponent<Rigidbody>();
 
         FindMainTarget();
     }
@@ -31,35 +41,81 @@ public class IaCharacther : MonoBehaviour, IDemageble
         DetectPriorityTargets();
         FindMainTarget();
 
-        Transform currentTarget = priorityTarget != null ? priorityTarget : mainTarget;
-
-        if (currentTarget == null)
+        if ((priorityTarget == null || !priorityTarget.gameObject.activeInHierarchy) &&
+        (mainTarget == null || !mainTarget.gameObject.activeInHierarchy))
         {
-            agent.isStopped = true;
-            agent.ResetPath();
-            return;
-        }
-
-        float distance = Vector3.Distance(transform.position, currentTarget.position);
-
-        if (distance > attackRange)
-        {
-            if (!agent.hasPath || agent.destination != currentTarget.position)
-            {
-                agent.SetDestination(currentTarget.position);
-            }
-
-            agent.isStopped = false;
+            currentTarget = null;
+            isAttacking = false;
         }
         else
         {
-            agent.isStopped = true;
+            currentTarget = priorityTarget != null ? priorityTarget : mainTarget;
+        }
 
-            Vector3 dir = (currentTarget.position - transform.position).normalized;
-            if (dir != Vector3.zero)
+
+        if (currentTarget == null)
+        {
+            rb.isKinematic = true;
+            agent.ResetPath();
+            agent.isStopped = true;
+            agent.speed = 0f;
+        }
+
+        if (currentTarget != null)
+        {
+            agent.isStopped = false;
+            rb.isKinematic = false;
+            agent.speed = 1;
+
+            float distance = Vector3.Distance(transform.position, currentTarget.position);
+
+            if (role == Role.Tank || role == Role.Warrior)
             {
-                Quaternion lookRot = Quaternion.LookRotation(new Vector3(dir.x, 0, dir.z));
-                transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, Time.deltaTime * 5f);
+                if (distance > attackRange)
+                {
+                    if (!agent.hasPath || agent.destination != currentTarget.position)
+                    {
+                        agent.SetDestination(currentTarget.position);
+                    }
+                   
+                    agent.isStopped = false;
+                }
+                else
+                {
+                    agent.isStopped = true;
+
+                    Vector3 dir = (currentTarget.position - transform.position).normalized;
+                    if (dir != Vector3.zero)
+                    {
+                        Quaternion lookRot = Quaternion.LookRotation(new Vector3(dir.x, 0, dir.z));
+                        transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, Time.deltaTime * 5f);
+                    }
+                }
+            }
+            if(role == Role.Archer || role == Role.Wizard)
+            {
+                if (distance > attackRange)
+                {
+                    if (!agent.hasPath || agent.destination != currentTarget.position)
+                    {
+                        agent.SetDestination(currentTarget.position);
+                    }
+                    agent.isStopped = false;
+                    isAttacking = false;
+                    
+                }
+                else
+                {
+                    agent.isStopped = true;
+                    isAttacking = true;
+                    Vector3 dir = (currentTarget.position - transform.position).normalized;
+                    if (dir != Vector3.zero)
+                    {
+                        Quaternion lookRot = Quaternion.LookRotation(new Vector3(dir.x, 0, dir.z));
+                        transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, Time.deltaTime * 5f);
+                    }
+                    
+                }   
             }
         }
     }
@@ -84,6 +140,11 @@ public class IaCharacther : MonoBehaviour, IDemageble
         }
 
         mainTarget = closest;
+
+        if(allStructures.Length == 0)
+        {
+            mainTarget = null;
+        }
     }
 
     private void DetectPriorityTargets()
@@ -107,6 +168,11 @@ public class IaCharacther : MonoBehaviour, IDemageble
         }
 
         priorityTarget = closest;
+
+        if (allEnemies.Length == 0)
+        {
+            priorityTarget = null;
+        }
     }
 
     public void SetPriorityTarget(Transform newTarget)
@@ -116,19 +182,25 @@ public class IaCharacther : MonoBehaviour, IDemageble
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (!isAttacking)
+        if (role == Role.Archer || role == Role.Wizard) return;
+
+        if(role == Role.Tank || role == Role.Warrior)
         {
-            IDemageble target = collision.gameObject.GetComponent<IDemageble>();
-            if (target != null)
+            
+            if (!IsAttacking)
             {
+                IDemageble target = collision.gameObject.GetComponent<IDemageble>();
+                if (target != null)
+                {
                 StartCoroutine(AttackAfterDelay(target));
+                }
             }
         }
     }
 
     private IEnumerator AttackAfterDelay(IDemageble target)
     {
-        isAttacking = true;
+        IsAttacking = true;
         yield return new WaitForSeconds(0.5f);
 
         if (target != null)
@@ -136,7 +208,7 @@ public class IaCharacther : MonoBehaviour, IDemageble
             target.TakeDamage(damage);
         }
 
-        isAttacking = false;
+        IsAttacking = false;
     }
 
     public void TakeDamage(int dmg)
@@ -152,4 +224,13 @@ public class IaCharacther : MonoBehaviour, IDemageble
     {
         return _type;
     }
+
+    private enum Role
+    {
+       None,
+       Archer,
+       Warrior,
+       Tank,
+       Wizard
+    }   
 }
