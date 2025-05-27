@@ -42,10 +42,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Cutoff: 0.38
+    - _Cutoff: 0.73
     - _DissolveParameter: -6.24
-    - _DissolvePatternStrength: 0.3
-    - _EdgeWidth: 0.02
+    - _DissolvePatternStrength: -0.12
+    - _EdgeWidth: 0.12
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
