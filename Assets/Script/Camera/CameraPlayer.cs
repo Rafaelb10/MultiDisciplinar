@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 public class CameraPlayer : MonoBehaviour
 {
     private IInterectable _lastInteracted;
+    private Card _lastCard;
     [SerializeField] private UiManager uiManager;
 
     [SerializeField] private InputActionReference click;
@@ -26,28 +27,27 @@ public class CameraPlayer : MonoBehaviour
 
 
             IInterectable hitObject = null;
+            Card hitObject2 = null;
 
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, 20))
             {
                 hitObject = hit.transform.GetComponent<IInterectable>();
+                hitObject2 = hit.transform.GetComponent<Card>();
             }
 
-            if (hitObject != _lastInteracted)
-            {
-                _lastInteracted?.ResetColor();
-                hitObject?.PossibleToInterect();
-            }
-
+            _lastCard = hitObject2;
             _lastInteracted = hitObject;
        
 
         if(_lastInteracted!=null)
         {
             uiManager.UpdateInteract(true,_lastInteracted.InteractName);
+            uiManager.ViewCard(true, _lastCard.Data.Life, _lastCard.Data.Attack, _lastCard.Data.Description, _lastCard.Data.Sprite);
         }
         else
         {
             uiManager.UpdateInteract(false);
+            uiManager.ViewCard(false, 0,0,"",null);
         }
 
     }

@@ -25,6 +25,12 @@ public class UiManager : MonoBehaviour
     [SerializeField] private float maxHp = 100f;
     [SerializeField] private float maxEnergy = 100f;
 
+    [SerializeField] private GameObject _cardView;
+    [SerializeField] private TextMeshProUGUI _lifeCard;
+    [SerializeField] private TextMeshProUGUI _damageCard;
+    [SerializeField] private TextMeshProUGUI _descriptionCard;
+    [SerializeField] private Image _spriteCard;
+
     private float currentHp;
     private float currentEnergy;
 
@@ -99,7 +105,7 @@ public class UiManager : MonoBehaviour
 
     private IEnumerator PreGameCountdown()
     {
-        int totalSeconds = 10;
+        int totalSeconds = 30;
 
         while (totalSeconds > 0)
         {
@@ -126,6 +132,15 @@ public class UiManager : MonoBehaviour
     {
         interacThintText.enabled = state;
         interacThintText.text = interactName;
+    }
+
+    public void ViewCard(bool state, int life, int attack, string description,Sprite _card)
+    {
+        _cardView.SetActive(state);
+        _lifeCard.text = Convert.ToString(life);
+        _damageCard.text = Convert.ToString(attack); ;
+        _descriptionCard.text = description;
+        _spriteCard.sprite = _card;
     }
 
     private IEnumerator RecoverEnergy()
