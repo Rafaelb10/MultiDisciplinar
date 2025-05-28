@@ -4532,6 +4532,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _timer: {fileID: 1229869947}
   _wall: {fileID: 1312302672}
+  _material: {fileID: 2100000, guid: c1fae4ef6a4c42d4191bc8351b94d9de, type: 2}
   _start: 0
   _gainEnergy: 0
   _win: {fileID: 0}
