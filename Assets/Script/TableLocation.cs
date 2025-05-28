@@ -48,28 +48,6 @@ public class TableLocation : MonoBehaviour, IInterectable
         }
     }
 
-    public void PossibleToInterect()
-    {
-        if (_cardManager.HaveCard == true)
-        {
-            Renderer renderer = GetComponent<Renderer>();
-            if (renderer != null)
-            {
-                Color baseColor = renderer.material.GetColor("_BaseColor");
-                Color bluish = new Color(baseColor.r * 0.8f, baseColor.g * 0.8f, 1f, baseColor.a);
-                renderer.material.SetColor("_BaseColor", bluish);
-            }
-        }
-    }
-
-    public void ResetColor()
-    {
-        if (_materialInstance != null)
-        {
-            _materialInstance.SetColor("_BaseColor", _originalColor);
-        }
-    }
-
     public void ClearCardFromThisPlace()
     {
         _cardInThisPlace = null;
