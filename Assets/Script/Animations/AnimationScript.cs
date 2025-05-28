@@ -6,10 +6,11 @@ public class AnimationScript : MonoBehaviour
     private Animator animator;
     private bool isDead = false;
     private bool walking = false;
+    private Rigidbody rb;
     void Start()
     {
         animator = GetComponent<Animator>();
-       
+        rb = GetComponent<Rigidbody>();
     }
 
     void Update()
@@ -19,10 +20,10 @@ public class AnimationScript : MonoBehaviour
         Andar();
        
     }
-    //public void Spawn()
-    //{
-    //    animator.SetTrigger("Spawn");
-    //}
+    public void Spawn()
+    {
+        animator.SetTrigger("Spawn");
+    }
     public void Andar()
     {
         if(walking == true)
@@ -58,6 +59,7 @@ public class AnimationScript : MonoBehaviour
     }
     IEnumerator DestroyObject()
     {
+        rb.isKinematic = true;
         yield return new WaitForSeconds(3.5f);
         Destroy(gameObject);
     }

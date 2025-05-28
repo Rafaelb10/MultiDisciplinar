@@ -53,13 +53,14 @@ public class Weapon : MonoBehaviour
     }
     private void MakingArrow()
     {
-        Arrow arrow = Instantiate(arrowPreFab, transform.position, transform.rotation);
-        arrow.SetDirection(transform.up + transform.forward);
+        Quaternion offset = Quaternion.Euler(0, -90, 90);
+        Quaternion newRot = transform.rotation * offset;
+        Arrow arrow = Instantiate(arrowPreFab, transform.position, newRot);
     }
     private void MakingWand()
     {
-        BulletWizard bullet = Instantiate(bulletWizardPreFab, transform.position, transform.rotation);
-        bullet.SetDirection(transform.up + transform.forward);
+        BulletWizard bullet = Instantiate(bulletWizardPreFab, transform.position, Quaternion.identity);
+        bullet.SetDirection(transform.forward);
     }
 
     private void ShootArrow()

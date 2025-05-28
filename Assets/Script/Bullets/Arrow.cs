@@ -4,12 +4,15 @@ public class Arrow : MonoBehaviour
 {
     private Rigidbody rb;
 
+    [SerializeField] private LayerMask ignoreLayer;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
     }
     private void Start()
     {
+        rb.linearVelocity = -transform.up.normalized * 1.60f;
         Destroy(gameObject, 2f);
     }
 
@@ -17,13 +20,6 @@ public class Arrow : MonoBehaviour
     {
 
     }
-
-    public void SetDirection(Vector3 direction)
-    {
-        transform.LookAt(direction);
-        rb.linearVelocity = direction * 1.60f;
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
         IDemageble damageable = collision.gameObject.GetComponent<IDemageble>();

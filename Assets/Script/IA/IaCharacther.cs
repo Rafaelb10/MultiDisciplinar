@@ -10,8 +10,10 @@ public class IaCharacther : MonoBehaviour, IDemageble
     [SerializeField] private int _type = 0;
     [SerializeField] private LayerMask detectionLayer;
     private Weapon weapon;
+    private AnimationScript animationScript;
 
     private bool isAttacking = false;
+    private bool animationFinished = false;
 
     private NavMeshAgent agent;
     private Transform mainTarget;
@@ -33,6 +35,9 @@ public class IaCharacther : MonoBehaviour, IDemageble
         weapon = GetComponentInChildren<Weapon>();
         rb = GetComponent<Rigidbody>();
 
+        animationScript = GetComponent<AnimationScript>();
+
+        animationScript.Spawn();
         FindMainTarget();
     }
 
@@ -68,14 +73,24 @@ public class IaCharacther : MonoBehaviour, IDemageble
             agent.speed = 1;
 
             float distance = Vector3.Distance(transform.position, currentTarget.position);
+            Vector3 dir = (currentTarget.position - transform.position).normalized;
 
-            if (role == Role.Tank || role == Role.Warrior)
+            if (role == Role.Barbaro || role == Role.Warrior)
             {
                 if (distance > attackRange)
                 {
                     if (!agent.hasPath || agent.destination != currentTarget.position)
                     {
+                        if (animationFinished == false)
+                        {
+                            animationScript.Andar();
+                            StartCoroutine(AnimationCoolDown());
+                        }
+
                         agent.SetDestination(currentTarget.position);
+
+                        Quaternion lookRot = Quaternion.LookRotation(new Vector3(-dir.x, -dir.y,-dir.z));
+                        transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, Time.deltaTime * 5f);
                     }
                    
                     agent.isStopped = false;
@@ -84,12 +99,18 @@ public class IaCharacther : MonoBehaviour, IDemageble
                 {
                     agent.isStopped = true;
 
-                    Vector3 dir = (currentTarget.position - transform.position).normalized;
+                   // Vector3 dir = (currentTarget.position - transform.position).normalized;
                     if (dir != Vector3.zero)
                     {
-                        Quaternion lookRot = Quaternion.LookRotation(new Vector3(dir.x, 0, dir.z));
+                        Quaternion lookRot = Quaternion.LookRotation(new Vector3(-dir.x, -dir.y,-dir.z));
                         transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, Time.deltaTime * 5f);
-                    }
+
+                        if (animationFinished == false)
+                        {
+                            animationScript.Atacar();
+                            StartCoroutine(AnimationCoolDown());
+                        }
+                    }  
                 }
             }
             if(role == Role.Archer || role == Role.Wizard)
@@ -98,6 +119,12 @@ public class IaCharacther : MonoBehaviour, IDemageble
                 {
                     if (!agent.hasPath || agent.destination != currentTarget.position)
                     {
+                        //if (animationFinished == false)
+                        //{
+                        //    animationScript.Andar();
+                        //    StartCoroutine(AnimationCoolDown());
+                        //}
+
                         agent.SetDestination(currentTarget.position);
                     }
                     agent.isStopped = false;
@@ -108,13 +135,18 @@ public class IaCharacther : MonoBehaviour, IDemageble
                 {
                     agent.isStopped = true;
                     isAttacking = true;
-                    Vector3 dir = (currentTarget.position - transform.position).normalized;
+                    //Vector3 dir = (currentTarget.position - transform.position).normalized;
                     if (dir != Vector3.zero)
                     {
                         Quaternion lookRot = Quaternion.LookRotation(new Vector3(dir.x, 0, dir.z));
                         transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, Time.deltaTime * 5f);
+
+                        //if (animationFinished == false)
+                        //{
+                        //    animationScript.Atacar();
+                        //    StartCoroutine(AnimationCoolDown());
+                        //}
                     }
-                    
                 }   
             }
         }
@@ -184,7 +216,7 @@ public class IaCharacther : MonoBehaviour, IDemageble
     {
         if (role == Role.Archer || role == Role.Wizard) return;
 
-        if(role == Role.Tank || role == Role.Warrior)
+        if(role == Role.Barbaro || role == Role.Warrior)
         {
             
             if (!IsAttacking)
@@ -216,7 +248,7 @@ public class IaCharacther : MonoBehaviour, IDemageble
         _hp -= dmg;
         if (_hp <= 0)
         {
-            Destroy(gameObject);
+            animationScript.Morrer();
         }
     }
 
@@ -225,12 +257,18 @@ public class IaCharacther : MonoBehaviour, IDemageble
         return _type;
     }
 
+    IEnumerator AnimationCoolDown()
+    {
+        animationFinished = true;
+        yield return new WaitForSeconds(2);
+        animationFinished = false;
+    }
     private enum Role
     {
        None,
        Archer,
        Warrior,
-       Tank,
+       Barbaro,
        Wizard
     }   
 }
