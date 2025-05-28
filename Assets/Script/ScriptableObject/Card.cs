@@ -18,6 +18,7 @@ public class Card : MonoBehaviour, IInterectable
 
     public Transform SpawCharacters { get => _spawCharacters; set => _spawCharacters = value; }
     public bool InTheTable { get => _inTheTable; set => _inTheTable = value; }
+    public string InteractName { get => GetStatus(); }
 
     public void SetData(CardData data)
     {
@@ -58,7 +59,21 @@ public class Card : MonoBehaviour, IInterectable
             StartCoroutine(CooldownToInvoke());
         }
     }
-    public void Interect()
+    public string GetStatus()
+    {
+        switch(_status)
+        {
+            case 0:
+            return "Buy";
+            case 1:
+            return "Pick";
+            case 2:
+            return "Place";
+            default:
+            return "";
+        }
+    }
+    public void Interact()
     {
         if (_master == 0)
         {
@@ -69,7 +84,7 @@ public class Card : MonoBehaviour, IInterectable
                 return;
             }
 
-            if (_status == 1 && Object.FindFirstObjectByType<CardManager>().HaveCard == false)
+            if (_status == 1)
             {
                 _status = 2;
                 Object.FindFirstObjectByType<CardManager>().HoldCard(this);
@@ -119,5 +134,10 @@ public class Card : MonoBehaviour, IInterectable
     public void SetEnemy()
     {
         _master = 1;
+    }
+
+    public void ReturnStatus()
+    {
+        _status = 1;
     }
 }

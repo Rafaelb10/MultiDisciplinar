@@ -2,7 +2,8 @@ using UnityEngine;
 
 public interface IInterectable
 {
-    void Interect();
+    public string InteractName { get;}
+    void Interact();
     void PossibleToInterect();
     void ResetColor();
 }

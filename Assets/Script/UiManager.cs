@@ -7,8 +7,9 @@ using UnityEngine.UI;
 public class UiManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _timer;
+    [SerializeField] private TextMeshProUGUI interacThintText;
     [SerializeField] private GameObject _wall;
-    [SerializeField ]private Material _material;
+    [SerializeField] private Material _material;
 
     [SerializeField] private bool _start;
     [SerializeField] private bool _gainEnergy;
@@ -36,7 +37,7 @@ public class UiManager : MonoBehaviour
 
         _timer.text = "00:30";
         StartCoroutine(PreGameCountdown());
-        StartCoroutine(RecoverEnergy()); //verificar
+        StartCoroutine(RecoverEnergy());
     }
 
     private void UpdateTimerDisplay(int seconds)
@@ -118,6 +119,12 @@ public class UiManager : MonoBehaviour
         _material.SetFloat("CutoffHeight", Mathf.Lerp(number, numberToFinish, 10f));
         yield return new WaitForSeconds(10f);
         _wall.SetActive(false);
+    }
+
+    public void UpdateInteract(bool state, string interactName="")
+    {
+        interacThintText.enabled = state;
+        interacThintText.text = interactName;
     }
 
     private IEnumerator RecoverEnergy()
