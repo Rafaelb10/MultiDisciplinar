@@ -8,6 +8,7 @@ public class UiManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _timer;
     [SerializeField] private GameObject _wall;
+    [SerializeField ]private Material _material;
 
     [SerializeField] private bool _start;
     [SerializeField] private bool _gainEnergy;
@@ -49,7 +50,7 @@ public class UiManager : MonoBehaviour
     {
         _start = true;
         _gainEnergy = true;
-        _wall.SetActive(false);
+        StartCoroutine(WallFall());
     }
 
     public void EndGame()
@@ -95,7 +96,7 @@ public class UiManager : MonoBehaviour
 
     private IEnumerator PreGameCountdown()
     {
-        int totalSeconds = 30;
+        int totalSeconds = 10;
 
         while (totalSeconds > 0)
         {
@@ -108,6 +109,15 @@ public class UiManager : MonoBehaviour
         StartGame();
 
         StartCoroutine(GameCountdown());
+    }
+
+    private IEnumerator WallFall()
+    {
+        float number = 2f;
+        float numberToFinish = -1f;
+        _material.SetFloat("CutoffHeight", Mathf.Lerp(number, numberToFinish, 10f));
+        yield return new WaitForSeconds(10f);
+        _wall.SetActive(false);
     }
 
     private IEnumerator RecoverEnergy()
