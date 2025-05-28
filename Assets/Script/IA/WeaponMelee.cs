@@ -4,7 +4,7 @@ using UnityEngine;
 public class WeaponMelee : MonoBehaviour
 {
     private Collider _collider;
-    [SerializeField] private string _tagEnemyName;
+    [SerializeField] private string _ignoreTag;
 
     private void Awake()
     {
@@ -13,7 +13,7 @@ public class WeaponMelee : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(_tagEnemyName))
+        if (other.gameObject.tag != _ignoreTag)
         {
             IDemageble damageable = other.GetComponent<IDemageble>();
 

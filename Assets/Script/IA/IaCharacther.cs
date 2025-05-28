@@ -6,7 +6,7 @@ public class IaCharacther : MonoBehaviour, IDemageble
 {
     [SerializeField] private float priorityDetectionRadius = 10f;
     [SerializeField] private float attackRange = 2f;
-    [SerializeField] private int damage = 1;
+    [SerializeField] private float damage;
     [SerializeField] private int _type = 0;
     [SerializeField] private LayerMask detectionLayer;
     private Weapon weapon;
@@ -14,13 +14,14 @@ public class IaCharacther : MonoBehaviour, IDemageble
 
     private bool isAttacking = false;
     private bool animationFinished = false;
+    private bool isAllyOnWay = false;
 
     private NavMeshAgent agent;
     private Transform mainTarget;
     private Transform priorityTarget;
     private Transform currentTarget;
 
-    private int _hp = 10;
+    [SerializeField] private float _hp = 10;
 
     private Rigidbody rb;
     [SerializeField] private Role role;
@@ -119,11 +120,11 @@ public class IaCharacther : MonoBehaviour, IDemageble
                 {
                     if (!agent.hasPath || agent.destination != currentTarget.position)
                     {
-                        //if (animationFinished == false)
-                        //{
-                        //    animationScript.Andar();
-                        //    StartCoroutine(AnimationCoolDown());
-                        //}
+                        if (animationFinished == false)
+                        {
+                            animationScript.Andar();
+                            StartCoroutine(AnimationCoolDown());
+                        }
 
                         agent.SetDestination(currentTarget.position);
                     }
@@ -138,19 +139,72 @@ public class IaCharacther : MonoBehaviour, IDemageble
                     //Vector3 dir = (currentTarget.position - transform.position).normalized;
                     if (dir != Vector3.zero)
                     {
-                        Quaternion lookRot = Quaternion.LookRotation(new Vector3(dir.x, 0, dir.z));
+                        Quaternion lookRot = Quaternion.LookRotation(new Vector3(-dir.x, -dir.y, -dir.z));
                         transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, Time.deltaTime * 5f);
+                        
+                        if(isAllyOnWay == false)
+                        {
+                            if (IsLineBlockedByAlly(dir))
+                            {
+                            StartCoroutine(StepAside());
+                            return;
+                            }
 
-                        //if (animationFinished == false)
-                        //{
-                        //    animationScript.Atacar();
-                        //    StartCoroutine(AnimationCoolDown());
-                        //}
+                        }
+                        if (animationFinished == false)
+                        {
+                            animationScript.Atacar();
+                            StartCoroutine(AnimationCoolDown());
+                        }
+
                     }
                 }   
             }
         }
     }
+
+    private bool IsLineBlockedByAlly(Vector3 direction)
+    {
+        Vector3 backward = direction;
+        Vector3 origin = transform.position;
+
+        Debug.DrawRay(origin, backward * attackRange, Color.pink);
+
+        if (Physics.Raycast(origin, backward, out RaycastHit hit, attackRange, detectionLayer))
+        {
+            IaCharacther ally = hit.collider.GetComponentInParent<IaCharacther>();
+            if (ally != null && ally != this && ally.GetTypeValue() == this._type)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private IEnumerator StepAside()
+    {
+        agent.isStopped = true;
+        agent.ResetPath();
+        isAllyOnWay = true;
+
+        float offset = Random.value > 0.5f ? 0.15f : 0.15f;
+        Vector3 sideDir = transform.right * offset;
+        Vector3 target = transform.position + sideDir;
+
+        float time = 0f;
+        float duration = 1f;
+        while (time < duration)
+        {
+            transform.position = Vector3.Lerp(transform.position, target, time / duration);
+            time += Time.deltaTime;
+            yield return null;
+        }
+        isAllyOnWay = false;
+        agent.isStopped = false;
+    }
+
+
 
     private void FindMainTarget()
     {
@@ -218,7 +272,6 @@ public class IaCharacther : MonoBehaviour, IDemageble
 
         if(role == Role.Barbaro || role == Role.Warrior)
         {
-            
             if (!IsAttacking)
             {
                 IDemageble target = collision.gameObject.GetComponent<IDemageble>();
@@ -243,7 +296,7 @@ public class IaCharacther : MonoBehaviour, IDemageble
         IsAttacking = false;
     }
 
-    public void TakeDamage(int dmg)
+    public void TakeDamage(float dmg)
     {
         _hp -= dmg;
         if (_hp <= 0)

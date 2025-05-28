@@ -56,6 +56,8 @@ public class Weapon : MonoBehaviour
         Quaternion offset = Quaternion.Euler(0, -90, 90);
         Quaternion newRot = transform.rotation * offset;
         Arrow arrow = Instantiate(arrowPreFab, transform.position, newRot);
+       // Arrow arrow = Instantiate(arrowPreFab, transform.position, transform.rotation);
+
     }
     private void MakingWand()
     {
@@ -74,7 +76,7 @@ public class Weapon : MonoBehaviour
 
     private void ShootWand()
     {
-        InvokeRepeating("MakingWand", 1f, 1f);
+        InvokeRepeating("MakingWand", 1.5f, 1.5f);
     }
 
     private void StopWand()

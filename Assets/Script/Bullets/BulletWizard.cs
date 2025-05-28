@@ -3,6 +3,7 @@ using UnityEngine;
 public class BulletWizard : MonoBehaviour
 {
     private Rigidbody rb;
+    [SerializeField] private string ignoreTagName;
 
     private void Awake()
     {
@@ -12,12 +13,6 @@ public class BulletWizard : MonoBehaviour
     {
         Destroy(gameObject, 2f);
     }
-
-    private void Update()
-    {
-
-    }
-
     public void SetDirection(Vector3 direction)
     {
         rb.linearVelocity = direction * 1.60f;
@@ -25,12 +20,15 @@ public class BulletWizard : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        IDemageble damageable = collision.gameObject.GetComponent<IDemageble>();
-
-        if (damageable != null)
+        if (!collision.gameObject.CompareTag(ignoreTagName))
         {
-            damageable.TakeDamage(1);
-            Destroy(gameObject);
+            IDemageble damageable = collision.gameObject.GetComponent<IDemageble>();
+            
+            if (damageable != null)
+            {   
+               damageable.TakeDamage(1);
+               Destroy(gameObject);
+            }
         }
     }
 }
