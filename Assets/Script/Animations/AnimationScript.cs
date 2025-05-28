@@ -6,6 +6,7 @@ public class AnimationScript : MonoBehaviour
     private Animator animator;
     private bool isDead = false;
     private bool walking = false;
+    private bool running = false;
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -32,6 +33,24 @@ public class AnimationScript : MonoBehaviour
         
         
     }
+    public void Correr()
+    {
+        if(running == true)
+        {
+            animator.SetBool("isRunning", running);
+        }
+    }
+    public void Crawl()
+    {
+        if (!running)
+        {
+            animator.SetBool("isCrawling", running);
+        }
+    }
+    public void Attack2()
+    {
+        animator.SetTrigger("Attack2");
+    }
     public void IsWalking()
     {
         walking = true;
@@ -41,6 +60,10 @@ public class AnimationScript : MonoBehaviour
     {
         walking = false;
 
+    }
+    public void IsRunning()
+    {
+        running = true;
     }
 
     public void Atacar()
