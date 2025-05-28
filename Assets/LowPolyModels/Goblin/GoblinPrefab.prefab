@@ -107,27 +107,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 04b437cec2cb1e445b0f9ecb55324157, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.75
+      value: 0.049999997
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 04b437cec2cb1e445b0f9ecb55324157, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.75
+      value: 0.049999997
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 04b437cec2cb1e445b0f9ecb55324157, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.75
+      value: 0.049999997
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 04b437cec2cb1e445b0f9ecb55324157, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.1595087
+      value: -0.4164034
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 04b437cec2cb1e445b0f9ecb55324157, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.5702541
+      value: 0.07499981
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 04b437cec2cb1e445b0f9ecb55324157, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.2441201
+      value: 1.1079125
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 04b437cec2cb1e445b0f9ecb55324157, type: 3}
       propertyPath: m_LocalRotation.w
@@ -977,8 +977,28 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6502182839619065283, guid: 04b437cec2cb1e445b0f9ecb55324157, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3253820664776923166}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 04b437cec2cb1e445b0f9ecb55324157, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 219403542818527712}
   m_SourcePrefab: {fileID: 100100000, guid: 04b437cec2cb1e445b0f9ecb55324157, type: 3}
+--- !u!1 &457429036257125635 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 04b437cec2cb1e445b0f9ecb55324157, type: 3}
+  m_PrefabInstance: {fileID: 763488337653864530}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &219403542818527712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 457429036257125635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c70aab106dd8bca43a465011d24f6005, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &942041653000961977 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 04b437cec2cb1e445b0f9ecb55324157, type: 3}
@@ -1004,15 +1024,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 4105ab69953f8364d87688c7590817ab, type: 3}
       propertyPath: m_LocalScale.x
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4105ab69953f8364d87688c7590817ab, type: 3}
       propertyPath: m_LocalScale.y
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4105ab69953f8364d87688c7590817ab, type: 3}
       propertyPath: m_LocalScale.z
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4105ab69953f8364d87688c7590817ab, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1053,6 +1073,10 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 4105ab69953f8364d87688c7590817ab, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4105ab69953f8364d87688c7590817ab, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 4105ab69953f8364d87688c7590817ab, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'

@@ -87,6 +87,10 @@ public class CardManager : MonoBehaviour
     }
     public void HoldCard(Card card)
     {
+        if (_haveCard == true) 
+        {
+            _holdCard.ReturnStatus();
+        }
         _holdCard = card;
         _haveCard = true;
     }
@@ -113,5 +117,4 @@ public class CardManager : MonoBehaviour
 
         PlaceCardsInSlots(); 
     }
-
 }

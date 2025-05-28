@@ -97,11 +97,11 @@ public class EnemyManage : MonoBehaviour
             CardData selectedData = possibleCards[Random.Range(0, possibleCards.Count)];
 
             Transform newCard = Instantiate(_CardToBuy, slot.position, slot.rotation, slot);
-
             Card cardDisplay = newCard.GetComponent<Card>();
             if (cardDisplay != null)
             {
                 cardDisplay.SetData(selectedData);
+                cardDisplay.SpawCharacters = slot.transform;
                 cardDisplay.SetEnemy();
             }
 

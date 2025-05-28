@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 public class CameraPlayer : MonoBehaviour
 {
     private IInterectable _lastInteracted;
-    private bool _isInteracting = false;
+    [SerializeField] private UiManager uiManager;
 
     [SerializeField] private InputActionReference click;
     [SerializeField] private GameObject _freeCam;
@@ -24,8 +24,7 @@ public class CameraPlayer : MonoBehaviour
         }
 
 
-        if (_isInteracting == false)
-        {
+
             IInterectable hitObject = null;
 
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, 20))
@@ -37,9 +36,18 @@ public class CameraPlayer : MonoBehaviour
             {
                 _lastInteracted?.ResetColor();
                 hitObject?.PossibleToInterect();
-
-                _lastInteracted = hitObject;
             }
+
+            _lastInteracted = hitObject;
+       
+
+        if(_lastInteracted!=null)
+        {
+            uiManager.UpdateInteract(true,_lastInteracted.InteractName);
+        }
+        else
+        {
+            uiManager.UpdateInteract(false);
         }
 
     }
@@ -69,22 +77,11 @@ public class CameraPlayer : MonoBehaviour
 
     private void Interact()
     {
-        RaycastHit hit;
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 20))
+        if (_lastInteracted!=null)
         {
-            IInterectable Iteractable = hit.transform.GetComponent<IInterectable>();
-
-            if (Iteractable != null)
-            {
-                _isInteracting = true;
-                Iteractable.Interect();
-            }
+            _lastInteracted.Interact();
+            _lastInteracted = null;
         }
-    }
-
-    public void StopInterect()
-    {
-        _isInteracting = false;
     }
 }
 

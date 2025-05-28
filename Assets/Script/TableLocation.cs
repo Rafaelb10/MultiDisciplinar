@@ -12,6 +12,7 @@ public class TableLocation : MonoBehaviour, IInterectable
     [SerializeField] private CardManager _cardManager;
 
     public Transform TransformSpaw { get => _transformSpaw;}
+    public string InteractName { get => "GetCard";}
 
     void Start()
     {
@@ -28,7 +29,7 @@ public class TableLocation : MonoBehaviour, IInterectable
         haveACardInthisPlace = true;
     }
 
-    public void Interect()
+    public void Interact()
     {
         if (haveACardInthisPlace == false)
         {
