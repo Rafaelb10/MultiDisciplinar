@@ -20,6 +20,7 @@ public class Arrow : MonoBehaviour
 
     public void SetDirection(Vector3 direction)
     {
+        transform.LookAt(direction);
         rb.linearVelocity = direction * 1.60f;
     }
 
