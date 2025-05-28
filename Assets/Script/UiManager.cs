@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using TMPro;
 using System.Collections;
@@ -8,9 +9,10 @@ public class UiManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _timer;
     [SerializeField] private TextMeshProUGUI interacThintText;
+    
+    
     [SerializeField] private GameObject _wall;
-    [SerializeField] private Material _material;
-
+    
     [SerializeField] private bool _start;
     [SerializeField] private bool _gainEnergy;
 
@@ -39,7 +41,7 @@ public class UiManager : MonoBehaviour
         StartCoroutine(PreGameCountdown());
         StartCoroutine(RecoverEnergy());
     }
-
+    
     private void UpdateTimerDisplay(int seconds)
     {
         int minutes = seconds / 60;
@@ -114,10 +116,9 @@ public class UiManager : MonoBehaviour
 
     private IEnumerator WallFall()
     {
-        float number = 2f;
-        float numberToFinish = -1f;
-        _material.SetFloat("CutoffHeight", Mathf.Lerp(number, numberToFinish, 10f));
-        yield return new WaitForSeconds(10f);
+        _wall.GetComponent<Animator>().SetTrigger("Fall");
+        yield return new WaitForSeconds(1.1f);
+
         _wall.SetActive(false);
     }
 
