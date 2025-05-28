@@ -181,3 +181,4 @@ MonoBehaviour:
   detectionLayer:
     serializedVersion: 2
     m_Bits: 8
+  role: 0
