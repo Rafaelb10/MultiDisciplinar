@@ -12,7 +12,7 @@ public class Card : MonoBehaviour ,IInterectable
     private int _status = 0;
 
     private Transform _spawCharacters;
-
+    private int _master = 0;
     private bool _invoked;
     private bool _inTheTable;
 
@@ -42,36 +42,50 @@ public class Card : MonoBehaviour ,IInterectable
     {
         if (_status == 2 && FindObjectOfType<UiManager>().StartBattle == true && _invoked == false && InTheTable == true)
         {
-            Instantiate(Data.GameObjectCharacter, SpawCharacters);
+            GameObject character = Data.GameObjectCharacter;
+            character.transform.localScale = new Vector3(1, 1, 1);
+            Instantiate(character, _spawCharacters);
             FindObjectOfType<UiManager>().LoseEnergy(Data.Cost);
+            StartCoroutine(CooldownToInvoke());
+        }
+
+        if (_master == 1 && FindObjectOfType<UiManager>().StartBattle == true && _invoked == false) 
+        {
+            GameObject character = Data.GameObjectCharacter;
+            character.transform.localScale = new Vector3(0.05f,0.05f,0.05f);
+            Instantiate(character, Data.GameObjectCharacter.transform);
+            FindObjectOfType<EnemyManage>().LoseEnergy(Data.Cost);
             StartCoroutine(CooldownToInvoke());
         }
     }
     public void Interect() 
     {
-        if (_status == 0 && FindObjectOfType<CardManager>().CardsInHand.Count < 5)
+        if (_master == 0)
         {
-            _status = 1;
-            FindObjectOfType<CardManager>().SelectCard(this);
-            return;
-        }
-
-        if (_status == 1 && FindObjectOfType<CardManager>().HaveCard == false)
-        {
-            _status = 2;
-            FindObjectOfType<CardManager>().HoldCard(this);
-            return;
-        }
-
-        if (_status == 2)
-        {
-            TableLocation table = GetComponentInParent<TableLocation>();
-            if (table != null)
+            if (_status == 0 && FindObjectOfType<CardManager>().CardsInHand.Count < 5)
             {
-                Destroy(this.gameObject);
-                table.ClearCardFromThisPlace();
+                _status = 1;
+                FindObjectOfType<CardManager>().SelectCard(this);
+                return;
             }
-            return;
+
+            if (_status == 1 && FindObjectOfType<CardManager>().HaveCard == false)
+            {
+                _status = 2;
+                FindObjectOfType<CardManager>().HoldCard(this);
+                return;
+            }
+
+            if (_status == 2)
+            {
+                TableLocation table = GetComponentInParent<TableLocation>();
+                if (table != null)
+                {
+                    Destroy(this.gameObject);
+                    table.ClearCardFromThisPlace();
+                }
+                return;
+            }
         }
 
     }
@@ -100,5 +114,10 @@ public class Card : MonoBehaviour ,IInterectable
         _invoked = true;
        yield return new WaitForSeconds(Random.Range(10f, 20f));
         _invoked = false;
+    }
+
+    public void SetEnemy()
+    {
+        _master = 1;
     }
 }

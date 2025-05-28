@@ -35,7 +35,7 @@ public class UiManager : MonoBehaviour
 
         _timer.text = "00:30";
         StartCoroutine(PreGameCountdown());
-        StartCoroutine(RecoverEnergy());
+        StartCoroutine(RecoverEnergy()); //verificar
     }
 
     private void UpdateTimerDisplay(int seconds)

@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fcb1249f-b250-42db-ba77-46d0232418f4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Material/WallDissolve.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Material/WallDissolve.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/MaterialReferenceGiver.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/MaterialReferenceGiver.cs" afterDir="false" />
-    </list>
+    <list default="true" id="fcb1249f-b250-42db-ba77-46d0232418f4" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -115,7 +111,7 @@
       <updated>1748276845405</updated>
       <workItem from="1748276847576" duration="1268000" />
       <workItem from="1748346479759" duration="60000" />
-      <workItem from="1748355988120" duration="1897000" />
+      <workItem from="1748355988120" duration="2539000" />
     </task>
     <servers />
   </component>
