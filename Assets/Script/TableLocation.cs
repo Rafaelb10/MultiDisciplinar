@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TableLocation : MonoBehaviour, IInterectable
@@ -21,7 +22,14 @@ public class TableLocation : MonoBehaviour, IInterectable
 
     void Update()
     {
-
+        if (haveACardInthisPlace == true)
+        {
+            this.GetComponent<Collider>().enabled = false;
+        }
+        else if (haveACardInthisPlace == false)
+        {
+            this.GetComponent<Collider>().enabled = true;
+        }
     }
     public void ReceiveCard(Card card)
     {
