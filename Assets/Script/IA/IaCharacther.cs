@@ -168,7 +168,7 @@ public class IaCharacther : MonoBehaviour, IDemageble
         Vector3 backward = direction;
         Vector3 origin = transform.position;
 
-        Debug.DrawRay(origin, backward * attackRange, Color.pink);
+        Debug.DrawRay(origin, backward * attackRange, Color.red);
 
         if (Physics.Raycast(origin, backward, out RaycastHit hit, attackRange, detectionLayer))
         {

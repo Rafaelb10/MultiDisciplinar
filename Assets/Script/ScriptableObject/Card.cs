@@ -53,7 +53,7 @@ public class Card : MonoBehaviour, IInterectable
         if (_master == 1 && Object.FindFirstObjectByType<UiManager>().StartBattle == true && _invoked == false)
         {
             GameObject character = Data.GameObjectCharacter;
-            character.transform.localScale = new Vector3(0.38f, 1f, 0.22f);
+            character.transform.localScale = new Vector3(1f, 1f, 1f);
             Instantiate(character, _spawCharacters);
             Object.FindFirstObjectByType<EnemyManage>().LoseEnergy(Data.Cost);
             StartCoroutine(CooldownToInvoke());
