@@ -13,8 +13,6 @@ public class EntityVoice : MonoSingleton<EntityVoice>
     private string[] _startingVoiceLines;
     private string[] _combatVoiceLines;
 
-    private float _timeElapsed;
-    [SerializeField] private float _timeBetweenLines = 10;
     private bool _hasEnteredCombat = false;
 
     protected override void Awake()
@@ -31,27 +29,9 @@ public class EntityVoice : MonoSingleton<EntityVoice>
     // Update is called once per frame
     void Update()
     {
-        _timeElapsed += Time.deltaTime;
-        if (_timeElapsed >= _timeBetweenLines && !_hasEnteredCombat)
-        {
-            _timeElapsed = 0;
-            int randomEntry = Random.Range(0, _startingVoiceLines.Length);
-            StartCoroutine(Speak(_startingVoiceLines[randomEntry]));
-        }
-
-        if (_timeElapsed >= _timeBetweenLines && _hasEnteredCombat)
-        {
-            _timeElapsed = 0;
-            int randomEntry = Random.Range(0, _combatVoiceLines.Length);
-            StartCoroutine(Speak(_combatVoiceLines[randomEntry]));
-        }
+        
     }
 
-    public void StartCombatMode()
-    {
-        _hasEnteredCombat = true;
-        _entityAnimator.SetTrigger("Down");
-    }
     
     //Aqui situam-se as voicelines possíveis para mandar ao text. Mudem o número do array para refletir a quantidade de lines possíveis!!!!
     private void PopulateStartingLines()
@@ -75,12 +55,6 @@ public class EntityVoice : MonoSingleton<EntityVoice>
 
     private IEnumerator Speak(string line)
     {
-        for (int i = 0; i < line.Length; i++)
-        {
-            _text.text += line[i];
-            yield return new WaitForSeconds(0.05f);
-        }
-        yield return new WaitForSeconds(2.5f);
-        _text.text = "";
+        yield return null;
     }
 }
