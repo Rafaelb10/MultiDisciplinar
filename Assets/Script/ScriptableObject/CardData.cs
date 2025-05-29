@@ -33,4 +33,7 @@ public class CardData : ScriptableObject
     public Sprite Sprite { get => _sprite;}
     public GameObject GameObjectCharacter { get => _gameObjectCharacter;}
     public int Cost { get => _cost;}
+    public int Life { get => _life;}
+    public int Attack { get => _attack;}
+    public string Description { get => _description;}
 }

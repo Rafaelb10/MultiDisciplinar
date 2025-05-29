@@ -13,6 +13,7 @@ public class EnemyManage : MonoBehaviour
     private List<GameObject> spawnedCards = new List<GameObject>();
 
     [SerializeField] private Image _hp;
+    [SerializeField] private GameObject _EnemyUI;
 
     [SerializeField] private float maxHp = 100f;
     [SerializeField] private float maxEnergy = 100f;
@@ -20,9 +21,12 @@ public class EnemyManage : MonoBehaviour
     private float currentHp;
     private float currentEnergy;
 
+    public GameObject EnemyUI { get => _EnemyUI; set => _EnemyUI = value; }
+
     private void Start()
     {
         currentHp = maxHp;
+        currentEnergy = maxEnergy;
 
         UpdateUI();
 
