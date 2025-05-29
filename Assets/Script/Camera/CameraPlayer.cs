@@ -42,13 +42,21 @@ public class CameraPlayer : MonoBehaviour
         if(_lastInteracted!=null)
         {
             uiManager.UpdateInteract(true,_lastInteracted.InteractName);
-            uiManager.ViewCard(true, _lastCard.Data.Life, _lastCard.Data.Attack, _lastCard.Data.Description, _lastCard.Data.Sprite);
         }
         else
         {
             uiManager.UpdateInteract(false);
-            uiManager.ViewCard(false, 0,0,"",null);
         }
+
+        if (_lastCard != null)
+        {
+            uiManager.ViewCard(true, _lastCard.Data.Life, _lastCard.Data.Attack, _lastCard.Data.Description, _lastCard.Data.Sprite);
+        }
+        else
+        {
+            uiManager.ViewCard(false, 0, 0, "", null);
+        }
+
 
     }
 
