@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class structure : MonoBehaviour, IDemageble
 {
-    [SerializeField] int Hp;
+    [SerializeField] float Hp;
     [SerializeField] private int _type = 0;
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
        Hp = Hp - damage;
         if (Hp <= 0) 
