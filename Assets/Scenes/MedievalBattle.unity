@@ -5810,6 +5810,7 @@ MonoBehaviour:
   _damageCard: {fileID: 895899471}
   _descriptionCard: {fileID: 1605599875}
   _spriteCard: {fileID: 570356537}
+  lerpSpeed: 2
 --- !u!114 &1228725710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5834,6 +5835,7 @@ MonoBehaviour:
   - {fileID: 1970450404}
   - {fileID: 1405340840}
   - {fileID: 369886220}
+  _EnemySlot: []
   _CardToBuy: {fileID: 4818315739886773149, guid: cdb54e78ce6b8bf4f80c4dcb1d08c3ea, type: 3}
   generationInterval: 30
   _hp: {fileID: 290945217}
@@ -9156,6 +9158,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2134655504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2134655497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf1d19d312a2fa645bf5a8237ad9c393, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _text: {fileID: 2044665364}
+  _entityAnimator: {fileID: 2134655501}
+  _timeBetweenLines: 10
 --- !u!1001 &4665500253202280003
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9238,6 +9255,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 47555607141240115, guid: fbc00eefc783d064cab121eed2e2b71c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2134655501}
+    - targetCorrespondingSourceObject: {fileID: 47555607141240115, guid: fbc00eefc783d064cab121eed2e2b71c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2134655504}
   m_SourcePrefab: {fileID: 100100000, guid: fbc00eefc783d064cab121eed2e2b71c, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
