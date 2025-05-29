@@ -33,6 +33,7 @@ public class UiManager : MonoBehaviour
 
     private float currentHp;
     private float currentEnergy;
+    private float updateSpeed = 0.5f;
 
     public bool StartBattle { get => _start;}
 
@@ -99,8 +100,8 @@ public class UiManager : MonoBehaviour
 
     private void UpdateUI()
     {
-        _hp.fillAmount = currentHp / maxHp;
-        _energy.fillAmount = currentEnergy / maxEnergy;
+        _hp.fillAmount = currentHp / maxHp/updateSpeed;
+        _energy.fillAmount = currentEnergy / maxEnergy/updateSpeed;
     }
 
     private IEnumerator PreGameCountdown()
