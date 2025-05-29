@@ -101,7 +101,7 @@ public class UiManager : MonoBehaviour
     private void UpdateUI()
     {
         _hp.fillAmount = currentHp / maxHp/updateSpeed;
-        _energy.fillAmount = currentEnergy / maxEnergy/updateSpeed;
+        _energy.fillAmount = currentEnergy / maxEnergy*updateSpeed;
     }
 
     private IEnumerator PreGameCountdown()
