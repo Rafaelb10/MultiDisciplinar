@@ -126,6 +126,7 @@ public class UiManager : MonoBehaviour
         yield return new WaitForSeconds(1.1f);
 
         _wall.SetActive(false);
+        FindFirstObjectByType<EnemyManage>().EnemyUI.SetActive(true);
     }
 
     public void UpdateInteract(bool state, string interactName="")
