@@ -101,7 +101,7 @@ public class UiManager : MonoBehaviour
     private void UpdateUI()
     {
         float targetFill =  currentHp / maxHp;
-        //_hp.fillAmount = currentHp / maxHp;
+        _hp.fillAmount = currentHp / maxHp;
         //_energy.fillAmount = currentEnergy / maxEnergy;
         displayedEnergy = Mathf.Lerp(currentEnergy, targetFill, Time.deltaTime * lerpSpeed);
         _energy.fillAmount = displayedEnergy;
