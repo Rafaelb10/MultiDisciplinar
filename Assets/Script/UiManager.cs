@@ -30,18 +30,18 @@ public class UiManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _damageCard;
     [SerializeField] private TextMeshProUGUI _descriptionCard;
     [SerializeField] private Image _spriteCard;
-
+    [SerializeField] private float lerpSpeed = 2f;
     private float currentHp;
     private float currentEnergy;
-    private float updateSpeed = 0.5f;
-
+    private float displayedEnergy;
+    
     public bool StartBattle { get => _start;}
 
     void Start()
     {
         currentHp = maxHp;
         currentEnergy = maxEnergy;
-
+        displayedEnergy = 1f;
         UpdateUI();
 
         _timer.text = "00:30";
@@ -100,8 +100,11 @@ public class UiManager : MonoBehaviour
 
     private void UpdateUI()
     {
-        _hp.fillAmount = currentHp / maxHp/updateSpeed;
-        _energy.fillAmount = currentEnergy / maxEnergy/updateSpeed;
+        float targetFill =  currentHp / maxHp;
+        //_hp.fillAmount = currentHp / maxHp;
+        //_energy.fillAmount = currentEnergy / maxEnergy;
+        displayedEnergy = Mathf.Lerp(currentEnergy, targetFill, Time.deltaTime * lerpSpeed);
+        _energy.fillAmount = displayedEnergy;
     }
 
     private IEnumerator PreGameCountdown()
