@@ -218,7 +218,7 @@ MonoBehaviour:
   m_PixelsPerUnitMultiplier: 1
 --- !u!222 &16631514
 CanvasRenderer:
-=======
+
   m_GameObject: {fileID: 7033931}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -237,7 +237,7 @@ BoxCollider:
 
   m_GameObject: {fileID: 16631511}
   m_CullTransparentMesh: 1
-=======
+
   m_GameObject: {fileID: 7033931}
   m_Material: {fileID: 0}
   m_IncludeLayers:
