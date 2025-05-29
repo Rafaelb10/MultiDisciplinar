@@ -144,7 +144,7 @@ MonoBehaviour:
   m_IgnoreFromBuild: 1
   m_ApplyToChildren: 1
   m_AffectedAgents: ffffffff
-<<<<<<< HEAD
+
 --- !u!1 &16631511
 GameObject:
   m_ObjectHideFlags: 0
@@ -183,7 +183,7 @@ RectTransform:
   m_SizeDelta: {x: 0.5, y: 0.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &16631513
-=======
+
 --- !u!114 &7033935
 >>>>>>> 913e5b80049a61ca06abc9c32012a67ef71a15af
 MonoBehaviour:
@@ -191,7 +191,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD
+
   m_GameObject: {fileID: 16631511}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -229,12 +229,12 @@ CanvasRenderer:
   _type: 1
 --- !u!65 &7033936
 BoxCollider:
->>>>>>> 913e5b80049a61ca06abc9c32012a67ef71a15af
+
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD
+
   m_GameObject: {fileID: 16631511}
   m_CullTransparentMesh: 1
 =======
@@ -253,7 +253,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.8256557, y: 2.5656495, z: 3.875037}
   m_Center: {x: -0.20446886, y: -0.7828247, z: -0.30604464}
->>>>>>> 913e5b80049a61ca06abc9c32012a67ef71a15af
+
 --- !u!1 &29412805
 GameObject:
   m_ObjectHideFlags: 0
