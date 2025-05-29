@@ -7,6 +7,7 @@ public class EnemyManage : MonoBehaviour
 {
     [SerializeField] private List<CardData> possibleCards;
     [SerializeField] private List<Transform> _cardsSlot = new List<Transform>();
+    [SerializeField] private List<Transform> _EnemySlot = new List<Transform>();
     [SerializeField] private Transform _CardToBuy;
     [SerializeField] private float generationInterval = 30f;
 
@@ -93,8 +94,10 @@ public class EnemyManage : MonoBehaviour
 
     private void GenerateNewCards()
     {
-        foreach (var slot in _cardsSlot)
+        for (int i = 0; i < _cardsSlot.Count; i++)
         {
+            var slot = _cardsSlot[i];
+
             if (Random.value < 0.3f)
                 continue;
 
@@ -105,7 +108,7 @@ public class EnemyManage : MonoBehaviour
             if (cardDisplay != null)
             {
                 cardDisplay.SetData(selectedData);
-                cardDisplay.SpawCharacters = slot.transform;
+                cardDisplay.SpawCharacters = _EnemySlot[i].transform;
                 cardDisplay.SetEnemy();
             }
 
