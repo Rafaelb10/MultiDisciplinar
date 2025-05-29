@@ -10,16 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1f9a183bb868b184b9540b10fc83df5b, type: 3}
-  m_Name: Tank Medieval
+  m_Name: Mago Medieval
   m_EditorClassIdentifier: 
   _cardType: 1
-  _sprite: {fileID: 21300000, guid: a7db875cf844bc74b94883a242f14b7d, type: 3}
+  _sprite: {fileID: 21300000, guid: a1ef397c01907b4419959da9ca12e601, type: 3}
   _gameObjectCard: {fileID: 4749338989641519367, guid: cdb54e78ce6b8bf4f80c4dcb1d08c3ea, type: 3}
-  _gameObjectCharacterPlayer: {fileID: 8290223671568601425, guid: 9455d88223d4b6840b9cad297dc3191d, type: 3}
+  _gameObjectCharacterPlayer: {fileID: 5777084813478755198, guid: ea74327496d7207488f377f203c36bc1, type: 3}
   _gameObjectCharacterEnemy: {fileID: 0}
-  _name: Tank
-  _description: 
-  _cost: 3
-  _life: 10
-  _attack: 2
-  _velocity: 1
+  _name: Mago
+  _description: She, mage of the kingdom,  will use her spells to bring suffering
+    to her enemies.
+  _cost: 4
+  _life: 2
+  _attack: 3
+  _velocity: 2

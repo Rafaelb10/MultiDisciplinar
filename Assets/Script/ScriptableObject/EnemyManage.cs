@@ -103,8 +103,11 @@ public class EnemyManage : MonoBehaviour
 
             CardData selectedData = possibleCards[Random.Range(0, possibleCards.Count)];
 
-            Transform newCard = Instantiate(_CardToBuy, slot.position, slot.rotation, slot);
-            Card cardDisplay = newCard.GetComponent<Card>();
+            GameObject cardGO = Instantiate(selectedData.GameObjectCard, slot);
+            cardGO.transform.localPosition = Vector3.zero;
+
+            Card cardDisplay = cardGO.GetComponent<Card>();
+
             if (cardDisplay != null)
             {
                 cardDisplay.SetData(selectedData);
@@ -112,7 +115,7 @@ public class EnemyManage : MonoBehaviour
                 cardDisplay.SetEnemy();
             }
 
-            spawnedCards.Add(newCard.gameObject);
+            spawnedCards.Add(cardGO);
         }
     }
 }

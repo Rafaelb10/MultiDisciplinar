@@ -61,17 +61,25 @@ public class Card : MonoBehaviour, IInterectable
     }
     public string GetStatus()
     {
-        switch(_status)
+        if(_master == 0)
         {
-            case 0:
-            return "Buy";
-            case 1:
-            return "Pick";
-            case 2:
-            return "Place";
-            default:
+            switch (_status)
+            {
+                case 0:
+                    return "Buy";
+                case 1:
+                    return "Pick";
+                case 2:
+                    return "Place";
+                default:
+                    return "";
+            }
+        }
+        else
+        {
             return "";
         }
+
     }
     public void Interact()
     {

@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f9a183bb868b184b9540b10fc83df5b, type: 3}
+  m_Name: Tank Medieval
+  m_EditorClassIdentifier: 
+  _cardType: 1
+  _sprite: {fileID: 21300000, guid: a7db875cf844bc74b94883a242f14b7d, type: 3}
+  _gameObjectCard: {fileID: 4749338989641519367, guid: cdb54e78ce6b8bf4f80c4dcb1d08c3ea, type: 3}
+  _gameObjectCharacterPlayer: {fileID: 8290223671568601425, guid: 9455d88223d4b6840b9cad297dc3191d, type: 3}
+  _gameObjectCharacterEnemy: {fileID: 0}
+  _name: Tank
+  _description: Often called a mad man, the barbarian will slice anyone's head with
+    his own axe and smash through any wall.
+  _cost: 3
+  _life: 10
+  _attack: 2
+  _velocity: 1

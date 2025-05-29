@@ -81,8 +81,6 @@ public class CardManager : MonoBehaviour
             Transform slot = CardsSlot[i];
             card.transform.SetParent(slot);
             card.transform.localPosition = Vector3.zero;
-            card.transform.localRotation = Quaternion.identity;
-            card.transform.localScale = Vector3.one; 
         }
     }
     public void HoldCard(Card card)
@@ -105,8 +103,6 @@ public class CardManager : MonoBehaviour
         }
         _holdCard.transform.SetParent(location.transform);
         _holdCard.transform.localPosition = Vector3.zero;
-        _holdCard.transform.localRotation = Quaternion.identity;
-        _holdCard.transform.localScale = Vector3.one;
 
         _holdCard.SpawCharacters = location.TransformSpaw;
         _holdCard.InTheTable = true;
