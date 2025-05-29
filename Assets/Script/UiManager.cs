@@ -126,7 +126,6 @@ public class UiManager : MonoBehaviour
 
     private IEnumerator WallFall()
     {
-        EntityVoice.Instance.StartCombatMode();
         _wall.GetComponent<Animator>().SetTrigger("Fall");
         yield return new WaitForSeconds(1.1f);
 
