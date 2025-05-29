@@ -29,7 +29,7 @@ public class CameraPlayer : MonoBehaviour
             IInterectable hitObject = null;
             Card hitObject2 = null;
 
-            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, 20))
+            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, 200))
             {
                 hitObject = hit.transform.GetComponent<IInterectable>();
                 hitObject2 = hit.transform.GetComponent<Card>();
