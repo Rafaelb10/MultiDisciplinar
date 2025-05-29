@@ -7,7 +7,7 @@ using UnityEngine;
 public class AudioManager : MonoSingleton<AudioManager>
 {
     private AudioSource _audioSource;
-    public override void Awake()
+    protected override void Awake()
     {
         base.Awake();
         _audioSource = GetComponent<AudioSource>();

@@ -18,5 +18,5 @@ public class structure : MonoBehaviour, IDemageble
     {
         return _type;
     }
-
+    //garantia
 }
