@@ -401,6 +401,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ArqueiroPreFab
       objectReference: {fileID: 0}
+    - target: {fileID: 193734723025373410, guid: b22fbd4222451fd49b893fe3e3fde0b5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 719335797968753240, guid: b22fbd4222451fd49b893fe3e3fde0b5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.34
@@ -607,6 +611,10 @@ PrefabInstance:
     - target: {fileID: 5777084813478755198, guid: 7748b26db0d2a7544a45b8d4da90ab39, type: 3}
       propertyPath: m_Name
       value: WizardPreFab
+      objectReference: {fileID: 0}
+    - target: {fileID: 5777084813478755198, guid: 7748b26db0d2a7544a45b8d4da90ab39, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6586378850194956740, guid: 7748b26db0d2a7544a45b8d4da90ab39, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1223,7 +1231,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7988810073369243560, guid: b1dc3e505fe7de942a67812b94488e1f, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1921,6 +1929,10 @@ PrefabInstance:
     - target: {fileID: 759909672081638321, guid: c7e9dd305424dfe409dc4aa6d6ec2610, type: 3}
       propertyPath: m_Name
       value: pistolinha
+      objectReference: {fileID: 0}
+    - target: {fileID: 759909672081638321, guid: c7e9dd305424dfe409dc4aa6d6ec2610, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
