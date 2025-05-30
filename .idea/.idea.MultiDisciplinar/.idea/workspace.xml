@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fcb1249f-b250-42db-ba77-46d0232418f4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Animator/Entity/entity_down.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animator/Entity/entity_down.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animator/Entity/entity_look.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animator/Entity/entity_look.anim" afterDir="false" />
-    </list>
+    <list default="true" id="fcb1249f-b250-42db-ba77-46d0232418f4" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -119,6 +116,7 @@
       <workItem from="1748528347458" duration="1521000" />
       <workItem from="1748612338954" duration="150000" />
       <workItem from="1748612712875" duration="4133000" />
+      <workItem from="1748623940769" duration="791000" />
     </task>
     <servers />
   </component>
