@@ -47,6 +47,8 @@ public class UiManager : MonoBehaviour
         if(currentHp <= 0)
         {
             _lose.SetActive(true);
+
+            Cursor.lockState = CursorLockMode.None;
         }
     }
     void Start()
@@ -78,8 +80,14 @@ public class UiManager : MonoBehaviour
     public void EndGame()
     {
         _lose.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
     }
-
+    public void Winner()
+    {
+        _win.SetActive(true);
+        Time.timeScale = 0f;
+        Cursor.lockState = CursorLockMode.None;
+    }
     public void LoseHp(float amount)
     {
         currentHp = currentHp - amount;

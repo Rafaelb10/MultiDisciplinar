@@ -4,8 +4,13 @@ using UnityEngine.SceneManagement;
 public class MenusController : MonoBehaviour
 {
     [SerializeField] GameObject _creditos;
-    public GameObject _pauseMenuUI;
+    [SerializeField] private GameObject _pauseMenuUI;
     private bool _isPaused = false;
+
+    private void Start()
+    {
+        _pauseMenuUI.SetActive(false);
+    }
     public void Play()
     {
         SceneManager.LoadScene(1);
@@ -29,6 +34,11 @@ public class MenusController : MonoBehaviour
             }
 
         }
+    }
+    public  void MainMenu()
+    {
+        SceneManager.LoadScene(0);
+        Time.timeScale = 1f;
     }
     public void Quit()
     {
@@ -57,6 +67,8 @@ public class MenusController : MonoBehaviour
     public void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        _pauseMenuUI.SetActive(false);
+        Time.timeScale = 1f;
     }
 
     void Pause()

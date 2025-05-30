@@ -28,7 +28,8 @@ public class EnemyManage : MonoBehaviour
     {
         if (currentHp <= 0)
         {
-            FindFirstObjectByType<UiManager>().Win.SetActive(true);
+            FindFirstObjectByType<UiManager>().Winner();
+            Cursor.lockState = CursorLockMode.None;
         }
     }
 
