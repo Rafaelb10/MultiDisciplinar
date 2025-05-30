@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CardManager : MonoBehaviour
 {
+    [SerializeField] private AudioClip _cardPlaceSFX;
+    
+    
     [SerializeField] private List<CardData> possibleCards;
     [SerializeField] private List<Transform> _cardsSlot = new List<Transform>();
 
@@ -110,7 +113,7 @@ public class CardManager : MonoBehaviour
 
         _holdCard = null;
         _haveCard = false;
-
+        AudioManager.Instance.PlayAsOneShot(_cardPlaceSFX, 0.6f);
         PlaceCardsInSlots(); 
     }
 }

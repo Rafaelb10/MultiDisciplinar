@@ -55,6 +55,7 @@ public class Card : MonoBehaviour, IInterectable
             character.GetComponent<IaCharacter>().SetPlayer();
             Instantiate(character, _spawCharacters);
             //AudioManager play Card Spawn Unit
+            AudioManager.Instance.PlayAsOneShot(_cardSpawnSFX, 0.6f);
             Object.FindFirstObjectByType<UiManager>().LoseEnergy(Data.Cost);
             StartCoroutine(CooldownToInvoke());
         }
@@ -99,6 +100,7 @@ public class Card : MonoBehaviour, IInterectable
             {
                 _status = 1;
                 //Play the Card Picked Up
+                AudioManager.Instance.PlayAsOneShot(_cardPickedUpSFX, 0.6f);
                 Object.FindFirstObjectByType<CardManager>().SelectCard(this);
                 return;
             }

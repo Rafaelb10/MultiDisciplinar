@@ -123,6 +123,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 976d78f613c1220468086684d74a4840, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _cardPickedUpSFX: {fileID: 8300000, guid: 4d7c456484aba784aa2a6ffc9d09462f, type: 3}
+  _cardDownSFX: {fileID: 8300000, guid: 82c5af0f9517a3a439485453381fb591, type: 3}
+  _cardSpawnSFX: {fileID: 8300000, guid: 5b4df54fe8d7e174fb4a4bd93d6eaede, type: 3}
   _spriteImage: {fileID: 8489765939580993027}
 --- !u!1 &7509002846123593773
 GameObject:
