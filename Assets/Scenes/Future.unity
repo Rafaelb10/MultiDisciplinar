@@ -847,7 +847,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5502f7c16c42edf4391114baf8277959, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiManager: {fileID: 0}
   click: {fileID: -377029585012868554, guid: 34bd2586f989feb488edbaf43b2f7be2, type: 3}
+  _freeCam: {fileID: 0}
+  _fpCam: {fileID: 0}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -2235,7 +2238,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &879963092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2729,6 +2732,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timer: {fileID: 1229869947}
+  interacThintText: {fileID: 0}
   _wall: {fileID: 0}
   _start: 0
   _gainEnergy: 0
@@ -2738,6 +2742,12 @@ MonoBehaviour:
   _hp: {fileID: 1182133179}
   maxHp: 100
   maxEnergy: 100
+  _cardView: {fileID: 0}
+  _lifeCard: {fileID: 0}
+  _damageCard: {fileID: 0}
+  _descriptionCard: {fileID: 0}
+  _spriteCard: {fileID: 0}
+  lerpSpeed: 2
 --- !u!1 &1229869945
 GameObject:
   m_ObjectHideFlags: 0
