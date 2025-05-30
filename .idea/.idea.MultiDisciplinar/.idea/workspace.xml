@@ -5,15 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fcb1249f-b250-42db-ba77-46d0232418f4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.MultiDisciplinar/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MultiDisciplinar/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animator/Muralha/muralha_fall.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animator/Muralha/muralha_fall.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Material/WallDissolve.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Material/WallDissolve.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Card.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Card.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/BattleMedieval.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/BattleMedieval.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/EntityVoice.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/EntityVoice.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/ScriptableObject/Card.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/ScriptableObject/Card.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/ScriptableObject/CardManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/ScriptableObject/CardManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/UiManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/UiManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animator/Entity/entity_down.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animator/Entity/entity_down.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animator/Entity/entity_look.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animator/Entity/entity_look.anim" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,7 +118,7 @@
       <workItem from="1748462980349" duration="1303000" />
       <workItem from="1748528347458" duration="1521000" />
       <workItem from="1748612338954" duration="150000" />
-      <workItem from="1748612712875" duration="3323000" />
+      <workItem from="1748612712875" duration="4133000" />
     </task>
     <servers />
   </component>
