@@ -47,6 +47,8 @@ public class Card : MonoBehaviour, IInterectable
             GameObject character = Data.GameObjectCharacter;
             character.transform.localScale = new Vector3(1f, 1f, 1f);
             character.GetComponent<IaCharacter>().SetPlayer();
+            character.GetComponent<IaCharacter>().SetDamage(Data.Attack);
+            character.GetComponent<IaCharacter>().SetHp(Data.Life);
             Instantiate(character, _spawCharacters);
             Object.FindFirstObjectByType<UiManager>().LoseEnergy(Data.Cost);
             StartCoroutine(CooldownToInvoke());
@@ -57,6 +59,8 @@ public class Card : MonoBehaviour, IInterectable
             GameObject character = Data.GameObjectCharacter;
             character.transform.localScale = new Vector3(1f, 1f, 1f);
             character.GetComponent<IaCharacter>().SetEnemy();
+            character.GetComponent<IaCharacter>().SetDamage(Data.Attack);
+            character.GetComponent<IaCharacter>().SetHp(Data.Life);
             Instantiate(character, _spawCharacters);
             Object.FindFirstObjectByType<EnemyManage>().LoseEnergy(Data.Cost);
             StartCoroutine(CooldownToInvoke());

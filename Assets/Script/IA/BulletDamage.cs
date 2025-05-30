@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BulletDamage : MonoBehaviour
 {
-    private float _damage;
+    private float _damage = 2;
     private int _type;
     private float _speed = 5;
 
@@ -30,9 +30,9 @@ public class BulletDamage : MonoBehaviour
         if (other.TryGetComponent<IDemageble>(out var damageable))
         {
             damageable.TakeDamage(_damage);
+            Destroy(gameObject);
         }
 
-        Destroy(gameObject);
     }
 
     public void SetType(int type)

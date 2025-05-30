@@ -2,14 +2,13 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
-using Random = UnityEngine.Random;
 
 public class IaCharacter : MonoBehaviour, IDemageble
 {
     [Header("Config")]
     [SerializeField] private float detectionRadius = 10f;
     [SerializeField] private float attackRange = 2f;
-    [SerializeField] private float damage = 5f;
+    [SerializeField] private int damage = 5;
     [SerializeField] private float hp = 10f;
     [SerializeField] private int _type = 0;
 
@@ -20,8 +19,6 @@ public class IaCharacter : MonoBehaviour, IDemageble
 
     private NavMeshAgent agent;
     private AnimationScript animationScript;
-    private Weapon weapon;
-    private WeaponMelee weaponMelee;
     private Rigidbody rb;
 
     private Transform currentTarget;
@@ -36,10 +33,6 @@ public class IaCharacter : MonoBehaviour, IDemageble
     {
         agent = GetComponent<NavMeshAgent>();
         animationScript = GetComponent<AnimationScript>();
-        weapon = GetComponentInChildren<Weapon>();
-        weapon.SetType(_type);
-        weaponMelee = GetComponentInChildren<WeaponMelee>();
-        weaponMelee.SetType(_type);
         rb = GetComponent<Rigidbody>();
 
         agent.stoppingDistance = attackRange;
@@ -56,6 +49,7 @@ public class IaCharacter : MonoBehaviour, IDemageble
 
     private void UpdateTarget()
     {
+        // Encontrar o inimigo mais próximo, com base no tipo e no raio de detecção
         Transform enemyTarget = FindClosestTarget<IaCharacter>(detectionRadius, enemy => enemy.GetTypeValue() != this._type);
         Transform structureTarget = FindClosestTarget<structure>(Mathf.Infinity, s => s.GetTypeValue() != this._type);
 
@@ -99,22 +93,43 @@ public class IaCharacter : MonoBehaviour, IDemageble
         agent.isStopped = true;
         animationScript.PlayWalk(false);
 
-        if ((role == Role.Archer || role == Role.Wizard) && IsBlockedByAlly(direction))
+        if (role == Role.Archer || role == Role.Wizard)
         {
-            StartCoroutine(StepAside());
-            return;
+            FireProjectile(direction);
         }
-
-        if (!animationOnCooldown)
+        else if (role == Role.Warrior || role == Role.Barbaro)
         {
-            animationScript.PlayAttack();
-            StartCoroutine(AnimationCooldown());
-
-            if (role != Role.Archer && role != Role.Wizard)
+            if (!animationOnCooldown)
             {
+                animationScript.PlayAttack();
+                StartCoroutine(AnimationCooldown());
                 IDemageble target = currentTarget.GetComponent<IDemageble>();
                 if (target != null)
                     StartCoroutine(AttackWithDelay(target));
+            }
+        }
+    }
+
+    private void FireProjectile(Vector3 direction)
+    {
+        if (_prefabBullet != null)
+        {
+            if (!animationOnCooldown)
+            {
+                animationScript.PlayAttack();
+                StartCoroutine(AnimationCooldown());
+
+                GameObject bullet = Instantiate(_prefabBullet, transform.position, Quaternion.LookRotation(-transform.forward));
+                //Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
+                bullet.GetComponent<BulletDamage>().SetType(_type);
+                bullet.GetComponent<BulletDamage>().SetDamage(damage);
+
+                //if (bulletRb != null)
+                //{
+                //    bulletRb.AddForce(direction * 5f, ForceMode.VelocityChange);
+                //}
+
+                Destroy(bullet, 5f); 
             }
         }
     }
@@ -135,33 +150,6 @@ public class IaCharacter : MonoBehaviour, IDemageble
         agent.isStopped = true;
         agent.ResetPath();
         agent.speed = 0f;
-    }
-
-    private bool IsBlockedByAlly(Vector3 direction)
-    {
-        Vector3 origin = transform.position;
-        return Physics.Raycast(origin, direction, out RaycastHit hit, attackRange, detectionLayer)
-            && hit.collider.GetComponentInParent<IaCharacter>()?.GetTypeValue() == _type;
-    }
-
-    private IEnumerator StepAside()
-    {
-        agent.isStopped = true;
-        isAllyOnWay = true;
-
-        Vector3 offset = transform.right * (Random.value > 0.5f ? 0.15f : -0.15f);
-        Vector3 newPosition = transform.position + offset;
-
-        float elapsed = 0f;
-        while (elapsed < 1f)
-        {
-            transform.position = Vector3.Lerp(transform.position, newPosition, elapsed);
-            elapsed += Time.deltaTime;
-            yield return null;
-        }
-
-        isAllyOnWay = false;
-        agent.isStopped = false;
     }
 
     private IEnumerator AttackWithDelay(IDemageble target)
@@ -260,5 +248,14 @@ public class IaCharacter : MonoBehaviour, IDemageble
                 damageable.TakeDamage(damage);
             }
         }
+    }
+
+    public void SetDamage(int _damage)
+    {
+        damage = _damage;
+    }
+    public void SetHp(int _hp)
+    {
+        hp = _hp;
     }
 }
