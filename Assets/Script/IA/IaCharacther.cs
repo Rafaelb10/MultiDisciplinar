@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
-public class IaCharacter : MonoBehaviour
+public class IaCharacter : MonoBehaviour, IDemageble
 {
     [Header("Config")]
     [SerializeField] private float detectionRadius = 10f;
@@ -232,5 +232,13 @@ public class IaCharacter : MonoBehaviour
         Warrior,
         Barbaro,
         Wizard
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (role == Role.Warrior || role == Role.Barbaro)
+        {
+
+        }
     }
 }
