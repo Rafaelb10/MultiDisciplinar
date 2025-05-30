@@ -10161,8 +10161,8 @@ Light:
   m_Color: {r: 1, g: 0.9775041, b: 0.8160377, a: 1}
   m_Intensity: 32580.2
   m_Range: 248
-  m_SpotAngle: 86.10448
-  m_InnerSpotAngle: 86.10448
+  m_SpotAngle: 110.149254
+  m_InnerSpotAngle: 96.791046
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
@@ -10510,7 +10510,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2865309817762266452, guid: fbc00eefc783d064cab121eed2e2b71c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -155.8
+      value: -116.7
       objectReference: {fileID: 0}
     - target: {fileID: 2865309817762266452, guid: fbc00eefc783d064cab121eed2e2b71c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -10554,6 +10554,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7267664934783022525, guid: fbc00eefc783d064cab121eed2e2b71c, type: 3}
       propertyPath: prewarm
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7267664934783022525, guid: fbc00eefc783d064cab121eed2e2b71c, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7267664934783022525, guid: fbc00eefc783d064cab121eed2e2b71c, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7267664934783022525, guid: fbc00eefc783d064cab121eed2e2b71c, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
