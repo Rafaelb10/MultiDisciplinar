@@ -15,7 +15,7 @@ MonoBehaviour:
   _cardType: 1
   _sprite: {fileID: 21300000, guid: 899fc5bd64adebb45b13aa8f406320a0, type: 3}
   _gameObjectCard: {fileID: 4749338989641519367, guid: cdb54e78ce6b8bf4f80c4dcb1d08c3ea, type: 3}
-  _gameObjectCharacter: {fileID: 7988810073369243560, guid: b1dc3e505fe7de942a67812b94488e1f, type: 3}
+  _gameObjectCharacter: {fileID: 3162047383462637010, guid: f8b22b6c050941545a8b66b0d700ceb6, type: 3}
   _name: Granadeiro
   _description: Careful where you are seen, the bomber will throw grenades at anything
     that moves and isn't an ally.

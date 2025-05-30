@@ -1901,13 +1901,13 @@ MonoBehaviour:
   detectionRadius: 10
   attackRange: 6
   damage: 3
-  hp: 10
-  _type: 0
+  hp: 2
+  _type: 1
   detectionLayer:
     serializedVersion: 2
     m_Bits: 8
   role: 4
-  _prefabBullet: {fileID: 3162047383462637010}
+  _prefabBullet: {fileID: 1137440688595952000, guid: 1898dbf3b0471954cbe6829b68bd7409, type: 3}
 --- !u!54 &3625947634653930765
 Rigidbody:
   m_ObjectHideFlags: 0
