@@ -5,6 +5,12 @@ using UnityEngine.UI;
 
 public class Card : MonoBehaviour, IInterectable
 {
+    [Header("Card SFXs")]
+    [SerializeField] private AudioClip _cardPickedUpSFX;
+    [SerializeField] private AudioClip _cardDownSFX;
+    [SerializeField] private AudioClip _cardSpawnSFX;
+    
+    
     [SerializeField] private Image _spriteImage;
     public CardData Data { get; private set; }
 
@@ -50,6 +56,8 @@ public class Card : MonoBehaviour, IInterectable
             character.GetComponent<IaCharacter>().SetDamage(Data.Attack);
             character.GetComponent<IaCharacter>().SetHp(Data.Life);
             Instantiate(character, _spawCharacters);
+            //AudioManager play Card Spawn Unit
+            AudioManager.Instance.PlayAsOneShot(_cardSpawnSFX, 0.6f);
             Object.FindFirstObjectByType<UiManager>().LoseEnergy(Data.Cost);
             StartCoroutine(CooldownToInvoke());
         }
@@ -95,6 +103,8 @@ public class Card : MonoBehaviour, IInterectable
             if (_status == 0 && Object.FindFirstObjectByType<CardManager>().CardsInHand.Count < 5)
             {
                 _status = 1;
+                //Play the Card Picked Up
+                AudioManager.Instance.PlayAsOneShot(_cardPickedUpSFX, 0.6f);
                 Object.FindFirstObjectByType<CardManager>().SelectCard(this);
                 return;
             }
@@ -108,6 +118,7 @@ public class Card : MonoBehaviour, IInterectable
 
             if (_status == 2)
             {
+                //Play the Card Down
                 TableLocation table = GetComponentInParent<TableLocation>();
                 if (table != null)
                 {

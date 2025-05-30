@@ -47,12 +47,12 @@ Material:
     m_Ints: []
     m_Floats:
     - _Cutoff: 0.4
-    - _CutoffHeight: 2
+    - _CutoffHeight: 115.11
     - _DissolveParameter: -6.24
     - _DissolvePatternStrength: -0.12
-    - _EdgeWidth: 0.11
-    - _NoiseScale: 12.97
-    - _NoiseStrength: 4.96
+    - _EdgeWidth: 2.4
+    - _NoiseScale: 66.66
+    - _NoiseStrength: 30.44
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:

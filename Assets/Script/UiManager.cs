@@ -7,6 +7,10 @@ using UnityEngine.UI;
 
 public class UiManager : MonoBehaviour
 {
+    [Header("Per Level Music")]
+    [SerializeField] private AudioClip _preparationMusic;
+    [SerializeField] private AudioClip _combatMusic;
+    
     [SerializeField] private TextMeshProUGUI _timer;
     [SerializeField] private TextMeshProUGUI interacThintText;
     
@@ -110,7 +114,9 @@ public class UiManager : MonoBehaviour
     private IEnumerator PreGameCountdown()
     {
         int totalSeconds = 30;
-
+        
+        AudioManager.Instance.PlayAudio(_preparationMusic, 0.7f);
+        
         while (totalSeconds > 0)
         {
             UpdateTimerDisplay(totalSeconds);
@@ -126,7 +132,10 @@ public class UiManager : MonoBehaviour
 
     private IEnumerator WallFall()
     {
+        AudioManager.Instance.PlayAudio(_combatMusic, 0.7f);
         _wall.GetComponent<Animator>().SetTrigger("Fall");
+        EntityVoice.Instance.ChangeIntoBattle();
+        
         yield return new WaitForSeconds(1.1f);
 
         _wall.SetActive(false);

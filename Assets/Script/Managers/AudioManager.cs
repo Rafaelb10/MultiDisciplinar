@@ -6,6 +6,7 @@ using UnityEngine;
 //Um manager de 1ª source genérico para áudio. Tentei fazer com que fosse abstrato o suficiente para mover entre projetos.
 public class AudioManager : MonoSingleton<AudioManager>
 {
+    
     private AudioSource _audioSource;
     protected override void Awake()
     {
