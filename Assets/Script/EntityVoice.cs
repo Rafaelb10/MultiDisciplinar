@@ -31,7 +31,7 @@ public class EntityVoice : MonoSingleton<EntityVoice>
 
     public void ChangeIntoBattle()
     {
-        _entityAnimator.SetTrigger("Fall");
+        _entityAnimator.SetTrigger("Down");
         _hasEnteredCombat = true;
     }
 
