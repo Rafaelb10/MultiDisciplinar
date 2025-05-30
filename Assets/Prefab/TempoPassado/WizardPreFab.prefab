@@ -92,15 +92,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 54cb7943b19b67c40a2787884a18a380, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 54cb7943b19b67c40a2787884a18a380, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 54cb7943b19b67c40a2787884a18a380, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 54cb7943b19b67c40a2787884a18a380, type: 3}
       propertyPath: m_LocalPosition.x
@@ -277,14 +277,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 532a9412cc832284697702a941cc2760, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  priorityDetectionRadius: 0.5
+  detectionRadius: 10
   attackRange: 1
   damage: 1
-  _type: 0
+  hp: 10
+  type: 0
   detectionLayer:
     serializedVersion: 2
     m_Bits: 8
-  _hp: 10
   role: 4
 --- !u!114 &8559276821219402148
 MonoBehaviour:

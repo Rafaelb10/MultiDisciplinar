@@ -100,11 +100,10 @@ public class UiManager : MonoBehaviour
 
     private void UpdateUI()
     {
-        float targetFill =  currentHp / maxHp;
-        _hp.fillAmount = currentHp / maxHp;
-        //_energy.fillAmount = currentEnergy / maxEnergy;
-        displayedEnergy = Mathf.Lerp(currentEnergy, targetFill, Time.deltaTime * lerpSpeed);
-        _energy.fillAmount = displayedEnergy;
+        float targetFillHp =  currentHp / maxHp;
+        float targetFillEnergy = currentEnergy / maxEnergy;
+        _hp.fillAmount = Mathf.Lerp(_hp.fillAmount, targetFillHp, Time.deltaTime * lerpSpeed);
+        _energy.fillAmount = Mathf.Lerp(_energy.fillAmount, targetFillEnergy, Time.deltaTime * lerpSpeed);
     }
 
     private IEnumerator PreGameCountdown()

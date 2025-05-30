@@ -15,8 +15,7 @@ MonoBehaviour:
   _cardType: 1
   _sprite: {fileID: 21300000, guid: d0587345baa0c034785d462021f872db, type: 3}
   _gameObjectCard: {fileID: 4749338989641519367, guid: cdb54e78ce6b8bf4f80c4dcb1d08c3ea, type: 3}
-  _gameObjectCharacterPlayer: {fileID: 193734723025373410, guid: 13bacf58a2c09d74aa224f2470c1091e, type: 3}
-  _gameObjectCharacterEnemy: {fileID: 0}
+  _gameObjectCharacter: {fileID: 759909672081638321, guid: c7e9dd305424dfe409dc4aa6d6ec2610, type: 3}
   _name: Pistoleiro
   _description: Often good on the high ground, the shooter will insert bullets into
     the head of her enemies.

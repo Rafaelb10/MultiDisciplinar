@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -43,8 +44,9 @@ public class Card : MonoBehaviour, IInterectable
     {
         if (_status == 2 && Object.FindFirstObjectByType<UiManager>().StartBattle == true && _invoked == false && InTheTable == true)
         {
-            GameObject character = Data.GameObjectCharacterPlayer;
-            character.transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
+            GameObject character = Data.GameObjectCharacter;
+            character.transform.localScale = new Vector3(1f, 1f, 1f);
+            character.GetComponent<IaCharacter>().SetPlayer();
             Instantiate(character, _spawCharacters);
             Object.FindFirstObjectByType<UiManager>().LoseEnergy(Data.Cost);
             StartCoroutine(CooldownToInvoke());
@@ -52,8 +54,9 @@ public class Card : MonoBehaviour, IInterectable
 
         if (_master == 1 && Object.FindFirstObjectByType<UiManager>().StartBattle == true && _invoked == false)
         {
-            GameObject character = Data.GameObjectCharacterPlayer;
+            GameObject character = Data.GameObjectCharacter;
             character.transform.localScale = new Vector3(1f, 1f, 1f);
+            character.GetComponent<IaCharacter>().SetEnemy();
             Instantiate(character, _spawCharacters);
             Object.FindFirstObjectByType<EnemyManage>().LoseEnergy(Data.Cost);
             StartCoroutine(CooldownToInvoke());

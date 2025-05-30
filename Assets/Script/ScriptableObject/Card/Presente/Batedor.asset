@@ -15,8 +15,7 @@ MonoBehaviour:
   _cardType: 1
   _sprite: {fileID: 21300000, guid: 2725c6f443e7a004ba05815cc8cb5d16, type: 3}
   _gameObjectCard: {fileID: 4749338989641519367, guid: cdb54e78ce6b8bf4f80c4dcb1d08c3ea, type: 3}
-  _gameObjectCharacterPlayer: {fileID: 324006437007278614, guid: 6a59b56938bda484aab69cc171d3f334, type: 3}
-  _gameObjectCharacterEnemy: {fileID: 0}
+  _gameObjectCharacter: {fileID: 3920886178689317138, guid: 4a3e546896910bc48a84667f64827ce1, type: 3}
   _name: Batedor
   _description: A singular man of the army, the soldier will beat anyone in his reach.
   _cost: 1

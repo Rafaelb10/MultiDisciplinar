@@ -1,289 +1,167 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
-public class IaCharacther : MonoBehaviour, IDemageble
+public class IaCharacter : MonoBehaviour
 {
-    [SerializeField] private float priorityDetectionRadius = 10f;
+    [Header("Config")]
+    [SerializeField] private float detectionRadius = 10f;
     [SerializeField] private float attackRange = 2f;
-    [SerializeField] private float damage;
-    [SerializeField] private int _type = 0;
+    [SerializeField] private float damage = 5f;
+    [SerializeField] private float hp = 10f;
+    [SerializeField] private int type = 0;
     [SerializeField] private LayerMask detectionLayer;
-    private Weapon weapon;
-    private AnimationScript animationScript;
-
-    private bool isAttacking = false;
-    private bool animationFinished = false;
-    private bool isAllyOnWay = false;
+    [SerializeField] private Role role;
 
     private NavMeshAgent agent;
-    private Transform mainTarget;
-    private Transform priorityTarget;
-    private Transform currentTarget;
-
-    [SerializeField] private float _hp = 10;
-
+    private AnimationScript animationScript;
+    private Weapon weapon;
+    private WeaponMelee weaponMelee;
     private Rigidbody rb;
-    [SerializeField] private Role role;
+
+    private Transform currentTarget;
+    private bool isDead = false;
+    private bool isAttacking = false;
+    private bool isAllyOnWay = false;
+    private bool animationOnCooldown = false;
 
     public bool IsAttacking { get => isAttacking; set => isAttacking = value; }
 
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        agent.stoppingDistance = attackRange;
-
+        animationScript = GetComponent<AnimationScript>();
         weapon = GetComponentInChildren<Weapon>();
+        weapon.SetType(type);
+        weaponMelee = GetComponentInChildren<WeaponMelee>();
+        weaponMelee.SetType(type);
         rb = GetComponent<Rigidbody>();
 
-        animationScript = GetComponent<AnimationScript>();
-
-        animationScript.Spawn();
-        FindMainTarget();
+        agent.stoppingDistance = attackRange;
+        animationScript.PlaySpawn();
     }
 
     private void Update()
     {
-        DetectPriorityTargets();
-        FindMainTarget();
+        if (isDead) return;
 
-        if ((priorityTarget == null || !priorityTarget.gameObject.activeInHierarchy) &&
-        (mainTarget == null || !mainTarget.gameObject.activeInHierarchy))
+        UpdateTarget();
+        HandleMovementAndAttack();
+    }
+
+    private void UpdateTarget()
+    {
+        Transform enemyTarget = FindClosestTarget<IaCharacter>(detectionRadius, enemy => enemy.GetTypeValue() != this.type);
+        Transform structureTarget = FindClosestTarget<structure>(Mathf.Infinity, s => s.GetTypeValue() != this.type);
+
+        currentTarget = enemyTarget != null ? enemyTarget : structureTarget;
+    }
+
+    private void HandleMovementAndAttack()
+    {
+        if (currentTarget == null)
         {
-            currentTarget = null;
-            isAttacking = false;
+            StopAgent();
+            animationScript.PlayWalk(false);
+            return;
+        }
+
+        float distance = Vector3.Distance(transform.position, currentTarget.position);
+        Vector3 direction = (currentTarget.position - transform.position).normalized;
+
+        FaceMovementDirection();
+
+        if (distance > attackRange)
+        {
+            MoveTo(currentTarget.position);
         }
         else
         {
-            currentTarget = priorityTarget != null ? priorityTarget : mainTarget;
+            Attack(direction);
+        }
+    }
+
+    private void MoveTo(Vector3 position)
+    {
+        agent.isStopped = false;
+        agent.SetDestination(position);
+        animationScript.PlayWalk(true);
+        IsAttacking = false;
+    }
+
+    private void Attack(Vector3 direction)
+    {
+        agent.isStopped = true;
+        animationScript.PlayWalk(false);
+
+        if ((role == Role.Archer || role == Role.Wizard) && IsBlockedByAlly(direction))
+        {
+            StartCoroutine(StepAside());
+            return;
         }
 
-
-        if (currentTarget == null)
+        if (!animationOnCooldown)
         {
-            rb.isKinematic = true;
-            agent.ResetPath();
-            agent.isStopped = true;
-            agent.speed = 0f;
-        }
+            animationScript.PlayAttack();
+            StartCoroutine(AnimationCooldown());
 
-        if (currentTarget != null)
-        {
-            agent.isStopped = false;
-            rb.isKinematic = false;
-            agent.speed = 1;
-
-            float distance = Vector3.Distance(transform.position, currentTarget.position);
-            Vector3 dir = (currentTarget.position - transform.position).normalized;
-
-            if (role == Role.Barbaro || role == Role.Warrior)
+            if (role != Role.Archer && role != Role.Wizard)
             {
-                if (distance > attackRange)
-                {
-                    if (!agent.hasPath || agent.destination != currentTarget.position)
-                    {
-                        if (animationFinished == false)
-                        {
-                            animationScript.Andar();
-                            StartCoroutine(AnimationCoolDown());
-                        }
-
-                        agent.SetDestination(currentTarget.position);
-
-                        Quaternion lookRot = Quaternion.LookRotation(new Vector3(-dir.x, -dir.y,-dir.z));
-                        transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, Time.deltaTime * 5f);
-                    }
-                   
-                    agent.isStopped = false;
-                }
-                else
-                {
-                    agent.isStopped = true;
-
-                   // Vector3 dir = (currentTarget.position - transform.position).normalized;
-                    if (dir != Vector3.zero)
-                    {
-                        Quaternion lookRot = Quaternion.LookRotation(new Vector3(-dir.x, -dir.y,-dir.z));
-                        transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, Time.deltaTime * 5f);
-
-                        if (animationFinished == false)
-                        {
-                            animationScript.Atacar();
-                            StartCoroutine(AnimationCoolDown());
-                        }
-                    }  
-                }
-            }
-            if(role == Role.Archer || role == Role.Wizard)
-            {
-                if (distance > attackRange)
-                {
-                    if (!agent.hasPath || agent.destination != currentTarget.position)
-                    {
-                        if (animationFinished == false)
-                        {
-                            animationScript.Andar();
-                            StartCoroutine(AnimationCoolDown());
-                        }
-
-                        agent.SetDestination(currentTarget.position);
-                    }
-                    agent.isStopped = false;
-                    isAttacking = false;
-                    
-                }
-                else
-                {
-                    agent.isStopped = true;
-                    isAttacking = true;
-                    //Vector3 dir = (currentTarget.position - transform.position).normalized;
-                    if (dir != Vector3.zero)
-                    {
-                        Quaternion lookRot = Quaternion.LookRotation(new Vector3(-dir.x, -dir.y, -dir.z));
-                        transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, Time.deltaTime * 5f);
-                        
-                        if(isAllyOnWay == false)
-                        {
-                            if (IsLineBlockedByAlly(dir))
-                            {
-                            StartCoroutine(StepAside());
-                            return;
-                            }
-
-                        }
-                        if (animationFinished == false)
-                        {
-                            animationScript.Atacar();
-                            StartCoroutine(AnimationCoolDown());
-                        }
-
-                    }
-                }   
+                IDemageble target = currentTarget.GetComponent<IDemageble>();
+                if (target != null)
+                    StartCoroutine(AttackWithDelay(target));
             }
         }
     }
 
-    private bool IsLineBlockedByAlly(Vector3 direction)
+    private void FaceMovementDirection()
     {
-        Vector3 backward = direction;
-        Vector3 origin = transform.position;
+        Vector3 velocity = agent.velocity;
 
-        Debug.DrawRay(origin, backward * attackRange, Color.red);
-
-        if (Physics.Raycast(origin, backward, out RaycastHit hit, attackRange, detectionLayer))
+        if (velocity.sqrMagnitude > 0.01f)
         {
-            IaCharacther ally = hit.collider.GetComponentInParent<IaCharacther>();
-            if (ally != null && ally != this && ally.GetTypeValue() == this._type)
-            {
-                return true;
-            }
+            Quaternion lookRotation = Quaternion.LookRotation(-velocity.normalized);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 10f);
         }
+    }
 
-        return false;
+    private void StopAgent()
+    {
+        agent.isStopped = true;
+        agent.ResetPath();
+        agent.speed = 0f;
+    }
+
+    private bool IsBlockedByAlly(Vector3 direction)
+    {
+        Vector3 origin = transform.position;
+        return Physics.Raycast(origin, direction, out RaycastHit hit, attackRange, detectionLayer)
+            && hit.collider.GetComponentInParent<IaCharacter>()?.GetTypeValue() == type;
     }
 
     private IEnumerator StepAside()
     {
         agent.isStopped = true;
-        agent.ResetPath();
         isAllyOnWay = true;
 
-        float offset = Random.value > 0.5f ? 0.15f : 0.15f;
-        Vector3 sideDir = transform.right * offset;
-        Vector3 target = transform.position + sideDir;
+        Vector3 offset = transform.right * (Random.value > 0.5f ? 0.15f : -0.15f);
+        Vector3 newPosition = transform.position + offset;
 
-        float time = 0f;
-        float duration = 1f;
-        while (time < duration)
+        float elapsed = 0f;
+        while (elapsed < 1f)
         {
-            transform.position = Vector3.Lerp(transform.position, target, time / duration);
-            time += Time.deltaTime;
+            transform.position = Vector3.Lerp(transform.position, newPosition, elapsed);
+            elapsed += Time.deltaTime;
             yield return null;
         }
+
         isAllyOnWay = false;
         agent.isStopped = false;
     }
 
-
-
-    private void FindMainTarget()
-    {
-        var allStructures = FindObjectsOfType<structure>();
-        float closestDistance = Mathf.Infinity;
-        Transform closest = null;
-
-        foreach (var structure in allStructures)
-        {
-            if (structure != null && structure.GetTypeValue() == 1)
-            {
-                float dist = Vector3.Distance(transform.position, structure.transform.position);
-                if (dist < closestDistance)
-                {
-                    closestDistance = dist;
-                    closest = structure.transform;
-                }
-            }
-        }
-
-        mainTarget = closest;
-
-        if(allStructures.Length == 0)
-        {
-            mainTarget = null;
-        }
-    }
-
-    private void DetectPriorityTargets()
-    {
-        var allEnemies = FindObjectsOfType<IaCharacther>();
-        float closestDistance = Mathf.Infinity;
-        Transform closest = null;
-
-        foreach (var enemy in allEnemies)
-        {
-            if (enemy == this) continue;
-            if (enemy.GetTypeValue() != _type)
-            {
-                float dist = Vector3.Distance(transform.position, enemy.transform.position);
-                if (dist <= priorityDetectionRadius && dist < closestDistance)
-                {
-                    closestDistance = dist;
-                    closest = enemy.transform;
-                }
-            }
-        }
-
-        priorityTarget = closest;
-
-        if (allEnemies.Length == 0)
-        {
-            priorityTarget = null;
-        }
-    }
-
-    public void SetPriorityTarget(Transform newTarget)
-    {
-        priorityTarget = newTarget;
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (role == Role.Archer || role == Role.Wizard) return;
-
-        if(role == Role.Barbaro || role == Role.Warrior)
-        {
-            if (!IsAttacking)
-            {
-                IDemageble target = collision.gameObject.GetComponent<IDemageble>();
-                if (target != null)
-                {
-                StartCoroutine(AttackAfterDelay(target));
-                }
-            }
-        }
-    }
-
-    private IEnumerator AttackAfterDelay(IDemageble target)
+    private IEnumerator AttackWithDelay(IDemageble target)
     {
         IsAttacking = true;
         yield return new WaitForSeconds(0.5f);
@@ -296,32 +174,63 @@ public class IaCharacther : MonoBehaviour, IDemageble
         IsAttacking = false;
     }
 
+    private IEnumerator AnimationCooldown()
+    {
+        animationOnCooldown = true;
+        yield return new WaitForSeconds(2);
+        animationOnCooldown = false;
+    }
+
+    private Transform FindClosestTarget<T>(float radius, System.Func<T, bool> predicate) where T : MonoBehaviour
+    {
+        T[] allTargets = GameObject.FindObjectsOfType<T>();
+        Transform closest = null;
+        float minDistance = Mathf.Infinity;
+
+        foreach (T target in allTargets)
+        {
+            if (!predicate(target)) continue;
+
+            float dist = Vector3.Distance(transform.position, target.transform.position);
+            if (dist < minDistance && dist <= radius)
+            {
+                minDistance = dist;
+                closest = target.transform;
+            }
+        }
+
+        return closest;
+    }
+
     public void TakeDamage(float dmg)
     {
-        _hp -= dmg;
-        if (_hp <= 0)
+        if (isDead) return;
+
+        hp -= dmg;
+        if (hp <= 0)
         {
-            animationScript.Morrer();
+            isDead = true;
+            animationScript.PlayDeath();
         }
     }
 
-    public int GetTypeValue()
+    public int GetTypeValue() => type;
+
+    public void SetEnemy()
     {
-        return _type;
+        type = 1;
+    }
+    public void SetPlayer()
+    {
+        type = 0;
     }
 
-    IEnumerator AnimationCoolDown()
-    {
-        animationFinished = true;
-        yield return new WaitForSeconds(2);
-        animationFinished = false;
-    }
     private enum Role
     {
-       None,
-       Archer,
-       Warrior,
-       Barbaro,
-       Wizard
-    }   
+        None,
+        Archer,
+        Warrior,
+        Barbaro,
+        Wizard
+    }
 }

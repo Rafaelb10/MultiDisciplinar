@@ -2,13 +2,21 @@ using UnityEngine;
 
 public class FreeCam : MonoBehaviour
 {
-    [Header("Movement Settings")]
-    [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private float verticalSpeed = 5f;
-    [SerializeField] private float rotationSpeed = 10f;
+    [Header("Movement")]
+    public float moveSpeed = 10f;
+    public float sprintMultiplier = 2f;
+    public float verticalSpeed = 5f;
 
-    [SerializeField] private GameObject _fpCam;
+    [Header("Mouse Look")]
+    public float lookSpeed = 2f;
+    public float maxYAngle = 80f;
+    public float minYAngle = -80f;
+
+    private float yaw = 0f;
+    private float pitch = 0f;
+
     [SerializeField] private GameObject _freeCam;
+    [SerializeField] private GameObject _fpCam;
 
     void Start()
     {
@@ -17,34 +25,39 @@ public class FreeCam : MonoBehaviour
 
     void Update()
     {
-        Vector3 moveDirection = Vector3.zero;
-
-        if (Input.GetKey(KeyCode.W))
-            moveDirection += transform.forward;
-        if (Input.GetKey(KeyCode.S))
-            moveDirection -= transform.forward;
-        if (Input.GetKey(KeyCode.A))
-            moveDirection -= transform.right;
-        if (Input.GetKey(KeyCode.D))
-            moveDirection += transform.right;
-
-        if (Input.GetKey(KeyCode.Space))
-            moveDirection += transform.up;
-        if (Input.GetKey(KeyCode.LeftShift))
-            moveDirection -= transform.up;
         if (Input.GetKey(KeyCode.E))
         {
             _fpCam.SetActive(true);
             _freeCam.SetActive(false);
         }
 
-        transform.position += moveDirection.normalized * moveSpeed * Time.deltaTime;
+        yaw += lookSpeed * Input.GetAxis("Mouse X");
+        pitch -= lookSpeed * Input.GetAxis("Mouse Y");
+        pitch = Mathf.Clamp(pitch, minYAngle, maxYAngle);
+        transform.eulerAngles = new Vector3(pitch, yaw, 0f);
 
-        Vector3 flatMove = new Vector3(moveDirection.x, 0f, moveDirection.z);
-        if (flatMove != Vector3.zero)
+        // Movement
+        float speed = moveSpeed;
+        if (Input.GetKey(KeyCode.LeftShift)) speed *= sprintMultiplier;
+
+        Vector3 direction = new Vector3(
+            Input.GetAxis("Horizontal"),
+            0f,
+            Input.GetAxis("Vertical")
+        );
+
+        Vector3 move = transform.TransformDirection(direction) * speed * Time.deltaTime;
+
+        // Vertical movement
+        if (Input.GetKey(KeyCode.Space)) move.y += verticalSpeed * Time.deltaTime;
+        if (Input.GetKey(KeyCode.LeftControl)) move.y -= verticalSpeed * Time.deltaTime;
+
+        transform.position += move;
+
+        // Unlock mouse
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Quaternion targetRotation = Quaternion.LookRotation(flatMove);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            Cursor.lockState = CursorLockMode.None;
         }
     }
 }

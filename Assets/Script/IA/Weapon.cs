@@ -1,92 +1,95 @@
-using System.Collections.Generic;
-using NUnit.Framework;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    [SerializeField] private TypeOfWeapon typeOfWeapon;
-    // private GameObject weaponHandler;
-    [SerializeField] private Arrow arrowPreFab;
-    [SerializeField] private BulletWizard bulletWizardPreFab; 
-    private IaCharacther iaCharacther;
+    [Header("Weapon Config")]
+    [SerializeField] private WeaponType weaponType = WeaponType.None;
+    [SerializeField] private Arrow arrowPrefab;
+    [SerializeField] private BulletWizard bulletWizardPrefab;
+
+    [Header("Fire Rates")]
+    [SerializeField] private float arrowRate = 1f;
+    [SerializeField] private float wandRate = 1.5f;
+
+    private IaCharacter iaCharacter;
+    private int _type;
 
     private void Awake()
     {
-        iaCharacther = GetComponentInParent<IaCharacther>();
+        iaCharacter = GetComponentInParent<IaCharacter>();
     }
 
     private void Update()
     {
-        if (typeOfWeapon == TypeOfWeapon.Bow)
+        if (iaCharacter == null) return;
+
+        switch (weaponType)
         {
-            if (iaCharacther.IsAttacking == true)
-            {
-                if (!IsInvoking("MakingArrow"))
-                {
-                    ShootArrow();
-                }
-            }
-            else if (iaCharacther.IsAttacking == false)
-            {
-                StopShootArrow();
-            }
-        }
-        else if (typeOfWeapon == TypeOfWeapon.Wand)
-        {
-            if(iaCharacther.IsAttacking == true)
-            {
-                if (!IsInvoking("MakingWand"))
-                {
-                    ShootWand();
-                }
-            }
-            else if (iaCharacther.IsAttacking == false)
-            {
-                StopWand();             
-            }
-        }
-        else if (typeOfWeapon == TypeOfWeapon.None)
-        {
-            CancelInvoke("ShootArrow");
-            CancelInvoke("ShootWand");
+            case WeaponType.Bow:
+                HandleAttack(nameof(FireArrow), arrowRate, iaCharacter.IsAttacking, FireArrow, StopArrow);
+                break;
+
+            case WeaponType.Wand:
+                HandleAttack(nameof(FireWand), wandRate, iaCharacter.IsAttacking, FireWand, StopWand);
+                break;
+
+            case WeaponType.None:
+                CancelInvoke(nameof(FireArrow));
+                CancelInvoke(nameof(FireWand));
+                break;
         }
     }
-    private void MakingArrow()
+
+    private void HandleAttack(string methodName, float rate, bool isAttacking, System.Action start, System.Action stop)
     {
+        if (isAttacking)
+        {
+            if (!IsInvoking(methodName))
+                InvokeRepeating(methodName, 0f, rate);
+        }
+        else
+        {
+            stop.Invoke();
+        }
+    }
+    private void FireArrow()
+    {
+        if (arrowPrefab == null) return;
+
         Quaternion offset = Quaternion.Euler(0, -90, 90);
-        Quaternion newRot = transform.rotation * offset;
-        Arrow arrow = Instantiate(arrowPreFab, transform.position, newRot);
-       // Arrow arrow = Instantiate(arrowPreFab, transform.position, transform.rotation);
-
+        Quaternion rotation = transform.rotation * offset;
+        Arrow bullet = Instantiate(arrowPrefab, transform.position, rotation);
+        bullet.SetType(_type);
     }
-    private void MakingWand()
+
+    private void StopArrow()
     {
-        BulletWizard bullet = Instantiate(bulletWizardPreFab, transform.position, Quaternion.identity);
+        CancelInvoke(nameof(FireArrow));
+    }
+
+    private void FireWand()
+    {
+        if (bulletWizardPrefab == null) return;
+
+        BulletWizard bullet = Instantiate(bulletWizardPrefab, transform.position, Quaternion.identity);
         bullet.SetDirection(transform.forward);
-    }
-
-    private void ShootArrow()
-    {
-        InvokeRepeating("MakingArrow", 1f, 1f);
-    }
-    private void StopShootArrow()
-    {
-        CancelInvoke("MakingArrow");
-    }
-
-    private void ShootWand()
-    {
-        InvokeRepeating("MakingWand", 1.5f, 1.5f);
+        bullet.SetType(_type);
     }
 
     private void StopWand()
     {
-        CancelInvoke("MakingWand");
+        CancelInvoke(nameof(FireWand));
     }
-    private enum TypeOfWeapon
+
+    private enum WeaponType
     {
         None,
         Bow,
         Wand
+    }
+
+    public void SetType(int type)
+    {
+        _type = type;
     }
 }

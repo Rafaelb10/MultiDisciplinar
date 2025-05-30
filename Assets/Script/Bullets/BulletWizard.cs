@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class BulletWizard : MonoBehaviour
 {
+    private int _type;
     private Rigidbody rb;
     [SerializeField] private string ignoreTagName;
 
@@ -18,17 +19,32 @@ public class BulletWizard : MonoBehaviour
         rb.linearVelocity = direction * 1.60f;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
-        if (!collision.gameObject.CompareTag(ignoreTagName))
+        GameObject other = collision.gameObject;
+
+        if (other.TryGetComponent<structure>(out var structureChar))
         {
-            IDemageble damageable = collision.gameObject.GetComponent<IDemageble>();
-            
-            if (damageable != null)
-            {   
-               damageable.TakeDamage(1);
-               Destroy(gameObject);
-            }
+            if (structureChar.GetTypeValue() == _type)
+                return;
         }
+
+        if (other.TryGetComponent<IaCharacter>(out var iaChar))
+        {
+            if (iaChar.GetTypeValue() == _type)
+                return;
+        }
+
+        if (other.TryGetComponent<IDemageble>(out var damageable))
+        {
+            damageable.TakeDamage(1);
+        }
+
+        Destroy(gameObject);
+    }
+
+    public void SetType(int type)
+    {
+        _type = type;
     }
 }

@@ -15,8 +15,7 @@ MonoBehaviour:
   _cardType: 1
   _sprite: {fileID: 21300000, guid: a7db875cf844bc74b94883a242f14b7d, type: 3}
   _gameObjectCard: {fileID: 4749338989641519367, guid: cdb54e78ce6b8bf4f80c4dcb1d08c3ea, type: 3}
-  _gameObjectCharacterPlayer: {fileID: 8290223671568601425, guid: 9455d88223d4b6840b9cad297dc3191d, type: 3}
-  _gameObjectCharacterEnemy: {fileID: 0}
+  _gameObjectCharacter: {fileID: 8290223671568601425, guid: 6c4e1b9942dfb1a4faaf40652d948619, type: 3}
   _name: Tank
   _description: Often called a mad man, the barbarian will slice anyone's head with
     his own axe and smash through any wall.

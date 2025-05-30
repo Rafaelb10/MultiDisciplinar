@@ -15,8 +15,7 @@ MonoBehaviour:
   _cardType: 1
   _sprite: {fileID: 21300000, guid: a1ef397c01907b4419959da9ca12e601, type: 3}
   _gameObjectCard: {fileID: 4749338989641519367, guid: cdb54e78ce6b8bf4f80c4dcb1d08c3ea, type: 3}
-  _gameObjectCharacterPlayer: {fileID: 5777084813478755198, guid: ea74327496d7207488f377f203c36bc1, type: 3}
-  _gameObjectCharacterEnemy: {fileID: 0}
+  _gameObjectCharacter: {fileID: 5777084813478755198, guid: 7748b26db0d2a7544a45b8d4da90ab39, type: 3}
   _name: Mago
   _description: She, mage of the kingdom,  will use her spells to bring suffering
     to her enemies.

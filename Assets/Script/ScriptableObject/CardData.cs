@@ -17,8 +17,7 @@ public class CardData : ScriptableObject
     [Header("Normal")]
     [SerializeField] private Sprite _sprite;
     [SerializeField] private GameObject _gameObjectCard;
-    [SerializeField] private GameObject _gameObjectCharacterPlayer;
-    [SerializeField] private GameObject _gameObjectCharacterEnemy;
+    [SerializeField] private GameObject _gameObjectCharacter;
 
     [SerializeField] private string _name;
     [SerializeField] private string _description;
@@ -32,8 +31,7 @@ public class CardData : ScriptableObject
 
     public GameObject GameObjectCard { get => _gameObjectCard; set => _gameObjectCard = value; }
     public Sprite Sprite { get => _sprite;}
-    public GameObject GameObjectCharacterPlayer { get => _gameObjectCharacterPlayer; }
-    public GameObject GameObjectCharacterEnemy { get => _gameObjectCharacterEnemy; }
+    public GameObject GameObjectCharacter { get => _gameObjectCharacter; }
     public int Cost { get => _cost;}
     public int Life { get => _life;}
     public int Attack { get => _attack;}

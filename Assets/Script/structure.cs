@@ -9,7 +9,13 @@ public class structure : MonoBehaviour, IDemageble
     {
        Hp = Hp - damage;
         if (Hp <= 0) 
-        { 
+        {
+            if (_type == 0)
+                FindFirstObjectByType<UiManager>().LoseHp(25f);
+
+            if (_type == 1)
+                FindFirstObjectByType<EnemyManage>().LoseHp(25f);
+
             Destroy(gameObject);
         }
     }
@@ -18,5 +24,4 @@ public class structure : MonoBehaviour, IDemageble
     {
         return _type;
     }
-    //garantia
 }

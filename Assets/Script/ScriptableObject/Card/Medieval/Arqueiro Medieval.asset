@@ -15,8 +15,7 @@ MonoBehaviour:
   _cardType: 1
   _sprite: {fileID: 21300000, guid: 2db30c67cd740224980ffbd9a5cc282f, type: 3}
   _gameObjectCard: {fileID: 4749338989641519367, guid: cdb54e78ce6b8bf4f80c4dcb1d08c3ea, type: 3}
-  _gameObjectCharacterPlayer: {fileID: 193734723025373410, guid: 13bacf58a2c09d74aa224f2470c1091e, type: 3}
-  _gameObjectCharacterEnemy: {fileID: 0}
+  _gameObjectCharacter: {fileID: 193734723025373410, guid: b22fbd4222451fd49b893fe3e3fde0b5, type: 3}
   _name: Arqueiro
   _description: Fast and agile, the archer moves through the shadows and shoots her
     arrows with precision.

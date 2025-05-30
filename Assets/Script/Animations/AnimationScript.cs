@@ -4,65 +4,46 @@ using UnityEngine;
 public class AnimationScript : MonoBehaviour
 {
     private Animator animator;
-    private bool isDead = false;
-    private bool walking = false;
     private Rigidbody rb;
-    void Start()
+    private bool isDead = false;
+
+    public bool IsDead => isDead;
+
+    private void Awake()
     {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
     }
 
-    void Update()
-    {
-        if (isDead) return;
-
-        Andar();
-       
-    }
-    public void Spawn()
+    public void PlaySpawn()
     {
         animator.SetTrigger("Spawn");
     }
-    public void Andar()
-    {
-        if(walking == true)
-        {
-            animator.SetBool("isWalking", walking);
-        }
-        
-        
-    }
-    public void IsWalking()
-    {
-        walking = true;
-       
-    }
-    public void IsNotWalking()
-    {
-        walking = false;
 
+    public void PlayWalk(bool shouldWalk)
+    {
+        animator.SetBool("isWalking", shouldWalk);
     }
 
-    public void Atacar()
+    public void PlayAttack()
     {
-   
-      animator.SetTrigger("Attack");
+        if (!isDead)
+            animator.SetTrigger("Attack");
     }
-    public void Morrer()
-    {
-       
-      animator.SetTrigger("Die");
-      isDead = true;
-      StartCoroutine(DestroyObject());
 
-    }
-    IEnumerator DestroyObject()
+    public void PlayDeath()
     {
+        if (isDead) return;
+
+        isDead = true;
+        animator.SetTrigger("Die");
         rb.isKinematic = true;
+        StartCoroutine(DestroyAfterDelay());
+    }
+
+    private IEnumerator DestroyAfterDelay()
+    {
         yield return new WaitForSeconds(3.5f);
         Destroy(gameObject);
     }
 }
-
-
