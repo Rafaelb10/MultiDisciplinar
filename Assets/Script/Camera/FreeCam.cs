@@ -15,25 +15,12 @@ public class FreeCam : MonoBehaviour
     private float yaw = 0f;
     private float pitch = 0f;
 
-    [Header("Y Limits")]
-    [SerializeField] private float maxY = 1.75f;
-
-    [SerializeField] private GameObject _fpCam;
     [SerializeField] private GameObject _freeCam;
     [SerializeField] private GameObject _fpCam;
 
-    private float yaw;
-    private float pitch;
     void Start()
     {
-        Vector3 e = transform.eulerAngles;
-        yaw = e.y;
-        pitch = e.x;
-
-        Camera.main.nearClipPlane = 0;  
         Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-
     }
 
     void Update()
@@ -43,46 +30,34 @@ public class FreeCam : MonoBehaviour
             _fpCam.SetActive(true);
             _freeCam.SetActive(false);
         }
-        CameraMovement();
-    }
 
-    private void LateUpdate()
-    {
-        MouseRotation();
+        yaw += lookSpeed * Input.GetAxis("Mouse X");
+        pitch -= lookSpeed * Input.GetAxis("Mouse Y");
+        pitch = Mathf.Clamp(pitch, minYAngle, maxYAngle);
+        transform.eulerAngles = new Vector3(pitch, yaw, 0f);
 
-    }
-    private void MouseRotation()
-    {
-        // read raw mouse delta
-        float mx = Input.GetAxisRaw("Mouse X");
-        float my = Input.GetAxisRaw("Mouse Y");
+        // Movement
+        float speed = moveSpeed;
+        if (Input.GetKey(KeyCode.LeftShift)) speed *= sprintMultiplier;
 
-        yaw += mx * rotationSpeed;
-        pitch -= my * rotationSpeed;
-        pitch = Mathf.Clamp(pitch, -89f, +89f);
+        Vector3 direction = new Vector3(
+            Input.GetAxis("Horizontal"),
+            0f,
+            Input.GetAxis("Vertical")
+        );
 
-        transform.rotation = Quaternion.Euler(pitch, yaw, 0f);
-    }
-    private void CameraMovement()
-    {
-        // horizontal (WASD)
-        Vector3 horizontal = Vector3.zero;
-        if (Input.GetKey(KeyCode.W)) horizontal += transform.forward;
-        if (Input.GetKey(KeyCode.S)) horizontal -= transform.forward;
-        if (Input.GetKey(KeyCode.A)) horizontal -= transform.right;
-        if (Input.GetKey(KeyCode.D)) horizontal += transform.right;
-        if (horizontal.sqrMagnitude > 1f) horizontal.Normalize();
+        Vector3 move = transform.TransformDirection(direction) * speed * Time.deltaTime;
 
-        // vertical (Space / Shift)
-        Vector3 vertical = Vector3.zero;
-        if (Input.GetKey(KeyCode.Space)) vertical += Vector3.up;
-        if (Input.GetKey(KeyCode.LeftShift)) vertical -= Vector3.up;
+        // Vertical movement
+        if (Input.GetKey(KeyCode.Space)) move.y += verticalSpeed * Time.deltaTime;
+        if (Input.GetKey(KeyCode.LeftControl)) move.y -= verticalSpeed * Time.deltaTime;
 
-        Vector3 delta = horizontal * moveSpeed * Time.deltaTime + vertical * verticalSpeed * Time.deltaTime;
+        transform.position += move;
 
-        //Limits the camera to the Y axis
-        Vector3 newPos = transform.position + delta;
-        newPos.y = Mathf.Max(newPos.y, maxY);
-        transform.position = newPos;
+        // Unlock mouse
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
     }
 }
