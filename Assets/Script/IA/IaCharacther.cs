@@ -11,9 +11,12 @@ public class IaCharacter : MonoBehaviour, IDemageble
     [SerializeField] private float attackRange = 2f;
     [SerializeField] private float damage = 5f;
     [SerializeField] private float hp = 10f;
-    [SerializeField] private int type = 0;
+    [SerializeField] private int _type = 0;
+
     [SerializeField] private LayerMask detectionLayer;
     [SerializeField] private Role role;
+
+    [SerializeField] private GameObject _prefabBullet;
 
     private NavMeshAgent agent;
     private AnimationScript animationScript;
@@ -34,9 +37,9 @@ public class IaCharacter : MonoBehaviour, IDemageble
         agent = GetComponent<NavMeshAgent>();
         animationScript = GetComponent<AnimationScript>();
         weapon = GetComponentInChildren<Weapon>();
-        weapon.SetType(type);
+        weapon.SetType(_type);
         weaponMelee = GetComponentInChildren<WeaponMelee>();
-        weaponMelee.SetType(type);
+        weaponMelee.SetType(_type);
         rb = GetComponent<Rigidbody>();
 
         agent.stoppingDistance = attackRange;
@@ -53,8 +56,8 @@ public class IaCharacter : MonoBehaviour, IDemageble
 
     private void UpdateTarget()
     {
-        Transform enemyTarget = FindClosestTarget<IaCharacter>(detectionRadius, enemy => enemy.GetTypeValue() != this.type);
-        Transform structureTarget = FindClosestTarget<structure>(Mathf.Infinity, s => s.GetTypeValue() != this.type);
+        Transform enemyTarget = FindClosestTarget<IaCharacter>(detectionRadius, enemy => enemy.GetTypeValue() != this._type);
+        Transform structureTarget = FindClosestTarget<structure>(Mathf.Infinity, s => s.GetTypeValue() != this._type);
 
         currentTarget = enemyTarget != null ? enemyTarget : structureTarget;
     }
@@ -138,7 +141,7 @@ public class IaCharacter : MonoBehaviour, IDemageble
     {
         Vector3 origin = transform.position;
         return Physics.Raycast(origin, direction, out RaycastHit hit, attackRange, detectionLayer)
-            && hit.collider.GetComponentInParent<IaCharacter>()?.GetTypeValue() == type;
+            && hit.collider.GetComponentInParent<IaCharacter>()?.GetTypeValue() == _type;
     }
 
     private IEnumerator StepAside()
@@ -214,15 +217,15 @@ public class IaCharacter : MonoBehaviour, IDemageble
         }
     }
 
-    public int GetTypeValue() => type;
+    public int GetTypeValue() => _type;
 
     public void SetEnemy()
     {
-        type = 1;
+        _type = 1;
     }
     public void SetPlayer()
     {
-        type = 0;
+        _type = 0;
     }
 
     private enum Role
@@ -234,11 +237,28 @@ public class IaCharacter : MonoBehaviour, IDemageble
         Wizard
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider collision)
     {
         if (role == Role.Warrior || role == Role.Barbaro)
         {
+            GameObject other = collision.gameObject;
 
+            if (other.TryGetComponent<structure>(out var structureChar))
+            {
+                if (structureChar.GetTypeValue() == _type)
+                    return;
+            }
+
+            if (other.TryGetComponent<IaCharacter>(out var iaChar))
+            {
+                if (iaChar.GetTypeValue() == _type)
+                    return;
+            }
+
+            if (other.TryGetComponent<IDemageble>(out var damageable))
+            {
+                damageable.TakeDamage(damage);
+            }
         }
     }
 }
