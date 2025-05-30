@@ -40,7 +40,15 @@ public class UiManager : MonoBehaviour
     private float displayedEnergy;
     
     public bool StartBattle { get => _start;}
+    public GameObject Win { get => _win; set => _win = value; }
 
+    private void Update()
+    {
+        if(currentHp <= 0)
+        {
+            _lose.SetActive(true);
+        }
+    }
     void Start()
     {
         currentHp = maxHp;
@@ -74,7 +82,7 @@ public class UiManager : MonoBehaviour
 
     public void LoseHp(float amount)
     {
-        currentHp -= amount;
+        currentHp = currentHp - amount;
         currentHp = Mathf.Clamp(currentHp, 0, maxHp);
         UpdateUI();
     }

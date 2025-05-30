@@ -13,7 +13,7 @@ public class TableLocation : MonoBehaviour, IInterectable
     [SerializeField] private CardManager _cardManager;
 
     public Transform TransformSpaw { get => _transformSpaw;}
-    public string InteractName { get => "GetCard";}
+    public string InteractName { get => "PlaceCard";}
 
     void Start()
     {

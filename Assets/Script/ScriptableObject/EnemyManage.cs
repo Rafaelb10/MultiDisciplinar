@@ -24,6 +24,14 @@ public class EnemyManage : MonoBehaviour
 
     public GameObject EnemyUI { get => _EnemyUI; set => _EnemyUI = value; }
 
+    private void Update()
+    {
+        if (currentHp <= 0)
+        {
+            FindFirstObjectByType<UiManager>().Win.SetActive(true);
+        }
+    }
+
     private void Start()
     {
         currentHp = maxHp;

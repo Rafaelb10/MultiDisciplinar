@@ -17,9 +17,17 @@ public class MenusController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (_isPaused)
+            {
+                Cursor.lockState = CursorLockMode.Locked;
                 Resume();
+            }
+
             else
+            {
+                Cursor.lockState = CursorLockMode.None;
                 Pause();
+            }
+
         }
     }
     public void Quit()
@@ -53,6 +61,7 @@ public class MenusController : MonoBehaviour
 
     void Pause()
     {
+        
         _pauseMenuUI.SetActive(true);
         Time.timeScale = 0f; 
         _isPaused = true;

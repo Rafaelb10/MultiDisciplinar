@@ -129,7 +129,7 @@ public class IaCharacter : MonoBehaviour, IDemageble
                 //    bulletRb.AddForce(direction * 5f, ForceMode.VelocityChange);
                 //}
 
-                Destroy(bullet, 5f); 
+                Destroy(bullet, 4f); 
             }
         }
     }

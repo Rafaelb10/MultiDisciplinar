@@ -103,7 +103,6 @@ public class Card : MonoBehaviour, IInterectable
             if (_status == 0 && Object.FindFirstObjectByType<CardManager>().CardsInHand.Count < 5)
             {
                 _status = 1;
-                //Play the Card Picked Up
                 AudioManager.Instance.PlayAsOneShot(_cardPickedUpSFX, 0.6f);
                 Object.FindFirstObjectByType<CardManager>().SelectCard(this);
                 return;
@@ -118,7 +117,6 @@ public class Card : MonoBehaviour, IInterectable
 
             if (_status == 2)
             {
-                //Play the Card Down
                 TableLocation table = GetComponentInParent<TableLocation>();
                 if (table != null)
                 {
