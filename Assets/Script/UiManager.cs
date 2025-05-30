@@ -65,6 +65,7 @@ public class UiManager : MonoBehaviour
 
     public void EndGame()
     {
+        _lose.SetActive(true);
     }
 
     public void LoseHp(float amount)

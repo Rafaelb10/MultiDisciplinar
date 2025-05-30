@@ -12,8 +12,11 @@ EditorBuildSettings:
     path: Assets/Scenes/LevelSelection.unity
     guid: f86640d76c9f0624a8d9b05d0747c054
   - enabled: 1
-    path: Assets/Scenes/MedievalBattle.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/Scenes/BattleMedieval.unity
+    guid: e92c8dce18a288342a5bd1a677e4c964
+  - enabled: 1
+    path: Assets/Scenes/BattlePresente.unity
+    guid: 2afcbaa5617e7884cb00513795bfd738
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
